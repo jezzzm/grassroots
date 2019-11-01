@@ -36,6 +36,51 @@ puts "created #{Club.count} clubs"
 
 
 User.destroy_all
-u1 = User.create :email=> "jez.milledge@gmail.com", :name=> "Jeremy Milledge"
-u2 = User.create :email=> "jt@ga.co", :name=> "JT"
+u1 = User.create :email=> "jez.milledge@gmail.com", :name=> "Jeremy Milledge", :admin=> true
+u2 = User.create :email=> "jt@ga.co", :name=> "JT", :admin=> false
 puts "created #{User.count} users"
+
+Team.destroy_all
+t1 = Team.create :division=> "3", :age_group=> 'AA'
+t2 = Team.create :division=> "2", :age_group=> 'O35'
+t3 = Team.create :division=> "1", :age_group=> 'SL'
+puts "created #{Team.count} teams"
+
+Ground.destroy_all
+g1 = Ground.create :short_sign=> 'ARCAD', :name=> "Arcadia Park", :latitude=> -33.617426, :longitude=> 151.057809
+g2 = Ground.create :short_sign=> 'CP', :name=> "Christie Park", :latitude=> -33.771386, :longitude=> 151.118809
+g3 = Ground.create :short_sign=> 'JAMES', :name=> "James Henty Drive Oval", :latitude=> -33.711862, :longitude=> 151.030346
+puts "created #{Ground.count} grounds"
+
+Match.destroy_all
+m1 = Match.create! :round=> 1, :game_date=> "2019-04-13 00:00:00.000", :home_score=> 3, :away_score=> 2
+m2 = Match.create! :round=> 1, :game_date=> "2019-04-13 00:00:00.000", :home_score=> 0, :away_score=> 0
+m3 = Match.create! :round=> 5, :game_date=> "2019-06-15 00:00:00.000", :home_score=> 1, :away_score=> 5
+puts "created #{Match.count} matches"
+
+#ASSOCIATIONS
+c2.teams << t1
+c21.teams << t2
+c5.teams << t3
+puts "associated teams to clubs"
+
+g1.matches << m1
+g2.matches << m2
+g3.matches << m3
+puts "associated matches to grounds"
+
+t1.users << u1
+t2.users << u1
+t3.users << u1 << u2
+puts "associated m:n users and favourite teams"
+
+m1.home_id = t1.id
+m1.away_id = t2.id
+m1.save
+m2.home_id = t2.id
+m2.away_id = t3.id
+m2.save
+m3.home_id = t3.id
+m3.away_id = t1.id
+m3.save
+puts "associated home and away teams to matches"
