@@ -1,0 +1,45 @@
+<h2>Latest Results</h2>
+
+<!-- Date | Age group/Div | Ground | Home Team | Home Score | Away Score | Away Team -->
+<% @matches.each do |m| %>
+  <ul>
+    <li>Date: <%= m.game_date.strftime('%A, %B %e, %Y') %></li>
+    <li>Comp: <%= m.age_group %>/<%= m.division %></li>
+    <li>Home Team: <%= m.home_team.club.name %></li>
+    <li>Home Score: <%= m.home_score %></li>
+    <li>Away Score: <%= m.away_score %></li>
+    <li>Away Team: <%= m.away_team.club.name %></li>
+    <li>Ground: <%= m.ground.name %></li>
+
+    <h2>Standings</h2>
+    <div class="standings">
+
+
+    <span><strong>Position</strong></span>
+    <span><strong>Team</strong></span>
+    <span><strong>MP</strong></span>
+    <span><strong>W</strong></span>
+    <span><strong>D</strong></span>
+    <span><strong>L</strong></span>
+    <span><strong>GF</strong></span>
+    <span><strong>GA</strong></span>
+    <span><strong>GD</strong></span>
+    <span><strong>Points</strong></span>
+    <!-- <span><strong>Form</strong></span>  change grid cols to 11 with form-->
+    <% get_standings(m.age_group, m.division).each_with_index do |t, i| %>
+      <span><%= i + 1 %></span>
+      <span><%= t[1][:name] %></span>
+      <span><%= t[1][:mp] %></span>
+      <span><%= t[1][:w] %></span>
+      <span><%= t[1][:l] %></span>
+      <span><%= t[1][:d] %></span>
+      <span><%= t[1][:gf] %></span>
+      <span><%= t[1][:ga] %></span>
+      <span><%= t[1][:gd] %></span>
+      <span><%= t[1][:pts] %></span>
+      <!-- <span><%= t[1][:form] %></span>-->
+    <% end %>
+
+    </div>
+  </ul>
+<% end %>

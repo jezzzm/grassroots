@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   resources :teams, :only => [:show]
 
-  resources :users, :only => [:new, :create]
+  resources :users, :only => [:index, :new, :create]
 
   resources :clubs, :only => [:index, :show]
 
@@ -15,8 +15,7 @@ Rails.application.routes.draw do
 
   resources :matches
 
-  get '/:age_group/:division/:team' => 'teams#show'
-  get '/:age_group/:division' => 'pages#division'
+
 
 
   #login is not crud
@@ -24,5 +23,9 @@ Rails.application.routes.draw do
   post '/login' => 'session#create'
   delete '/login' => 'session#destroy'
 
+  get '/:age_group/:division/:team' => 'teams#show'
+  get '/:age_group/:division' => 'pages#division'
   get '/:age_group' => 'pages#age_group'
+
+
 end

@@ -2,8 +2,9 @@
 
 <% if @user.errors.any? %>
   <ol>
-    <% @user.errors.full_messages do |msg| %>
-      <li><%= msg %></li>
+    <li>test</li>
+    <% @user.errors.full_messages do |m| %>
+      <li><%= m %></li>
     <% end %>
   </ol>
 <% end %>

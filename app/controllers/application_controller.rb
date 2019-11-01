@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  helper :all
   before_action :fetch_user #applies to every case
 
   private
