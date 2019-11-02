@@ -1,1 +1,12 @@
 <h2>division dash</h2>
+
+<h2>fixtures</h2>
+<% @matches.each do |m| %>
+  <ul>
+    <li>Date: <%= m.game_date.strftime('%l:%M%P, %A, %B %e, %Y') %></li>
+    <li>Comp: <%= m.age_group %>/<%= m.division %></li>
+    <li>Home Team: <%= m.home_team.name %></li>
+    <li>Away Team: <%= m.away_team.name %></li>
+    <li>Ground: <%= m.ground.name %></li>
+  </ul>
+<% end %>

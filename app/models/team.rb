@@ -15,4 +15,8 @@ class Team < ActiveRecord::Base
   def away_matches
     Match.where(:away_id => self.id)
   end
+
+  def name #to simply get the team name + identifier (e.g. "blue"), if it exists
+    "#{self.club.name}#{" " + self.identifier if self.identifier.present?}"
+  end
 end

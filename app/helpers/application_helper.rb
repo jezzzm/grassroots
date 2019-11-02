@@ -2,15 +2,15 @@ module ApplicationHelper
 
   def get_teams_in_comp(age, division)
     teams = Team.where(:age_group => age, :division => division)
-    # teams.map { |t| t.id}
   end
+
   def get_standings(age, division, round_limit=0) #TODO: use round limit to check change in positions for visual highlighting
     teams = get_teams_in_comp(age, division) #array of ids in specific comp
     teams = Hash[teams.collect { |t| #new hash with team_ids as keys, values are hash with keys set to zero
        [
          t.id, #team_id
          {
-          :name=> "#{t.club.name}#{" " + t.identifier if t.identifier.present?}",
+          :name=> t.name,
           :mp => 0, #matches played
           :w => 0, #wins
           :d => 0, #draws

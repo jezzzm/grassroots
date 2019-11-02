@@ -3,17 +3,17 @@
 <!-- Date | Age group/Div | Ground | Home Team | Home Score | Away Score | Away Team -->
 <% @matches.each do |m| %>
   <ul>
-    <li>Date: <%= m.game_date.strftime('%A, %B %e, %Y') %></li>
+    <li>Date: <%= m.game_date.strftime('%l:%M%P, %A, %B %e, %Y') %></li>
     <li>Comp: <%= m.age_group %>/<%= m.division %></li>
-    <li>Home Team: <%= m.home_team.club.name %></li>
+    <li>Home Team: <%= m.home_team.name %></li>
     <li>Home Score: <%= m.home_score %></li>
     <li>Away Score: <%= m.away_score %></li>
-    <li>Away Team: <%= m.away_team.club.name %></li>
+    <li>Away Team: <%= m.away_team.name %></li>
     <li>Ground: <%= m.ground.name %></li>
 
     <h2>Standings</h2>
     <div class="standings">
-
+    <!-- also check here https://stackoverflow.com/questions/19848697/css-grid-where-one-column-shrinks-to-fit-content-the-other-fills-the-remaning-s -->
 
     <span><strong>Position</strong></span>
     <span><strong>Team</strong></span>
