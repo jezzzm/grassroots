@@ -1,7 +1,7 @@
 <h2>Latest Results</h2>
 
 <!-- Date | Age group/Div | Ground | Home Team | Home Score | Away Score | Away Team -->
-<% @matches.each do |m| %>
+<% @results.each do |m| %>
   <ul>
     <li>Date: <%= m.game_date.strftime('%l:%M%P, %A, %B %e, %Y') %></li>
     <li>Comp: <%= m.age_group %>/<%= m.division %></li>
@@ -11,35 +11,19 @@
     <li>Away Team: <%= m.away_team.name %></li>
     <li>Ground: <%= m.ground.name %></li>
 
-    <h2>Standings</h2>
-    <div class="standings">
-    <!-- also check here https://stackoverflow.com/questions/19848697/css-grid-where-one-column-shrinks-to-fit-content-the-other-fills-the-remaning-s -->
+  </ul>
+<% end %>
 
-    <span><strong>Position</strong></span>
-    <span><strong>Team</strong></span>
-    <span><strong>MP</strong></span>
-    <span><strong>W</strong></span>
-    <span><strong>D</strong></span>
-    <span><strong>L</strong></span>
-    <span><strong>GF</strong></span>
-    <span><strong>GA</strong></span>
-    <span><strong>GD</strong></span>
-    <span><strong>Points</strong></span>
-    <!-- <span><strong>Form</strong></span>  change grid cols to 11 with form-->
-    <% get_standings(m.age_group, m.division).each_with_index do |t, i| %>
-      <span><%= i + 1 %></span>
-      <span><%= t[1][:name] %></span>
-      <span><%= t[1][:mp] %></span>
-      <span><%= t[1][:w] %></span>
-      <span><%= t[1][:l] %></span>
-      <span><%= t[1][:d] %></span>
-      <span><%= t[1][:gf] %></span>
-      <span><%= t[1][:ga] %></span>
-      <span><%= t[1][:gd] %></span>
-      <span><%= t[1][:pts] %></span>
-      <!-- <span><%= t[1][:form] %></span>-->
-    <% end %>
 
-    </div>
+<h2>upcoming fixtures</h2>
+<% @fixtures.each do |m| %>
+  <ul>
+    <li>Date: <%= m.game_date.strftime('%l:%M%P, %A, %B %e, %Y') %></li>
+    <li>Comp: <%= m.age_group %>/<%= m.division %></li>
+    <li>Home Team: <%= m.home_team.name %></li>
+    
+    <li>Away Team: <%= m.away_team.name %></li>
+    <li>Ground: <%= m.ground.name %></li>
+
   </ul>
 <% end %>

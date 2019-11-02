@@ -23,7 +23,7 @@ Rails.application.routes.draw do
   post '/login' => 'session#create'
   delete '/login' => 'session#destroy'
 
-  get '/:age_group/:division/:team' => 'teams#show'
+  get '/:age_group/:division/:id' => 'teams#show'
   get '/:age_group/:division' => 'pages#division'
   get '/:age_group' => 'pages#age_group'
 

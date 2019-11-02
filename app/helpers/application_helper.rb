@@ -1,11 +1,11 @@
 module ApplicationHelper
 
-  def get_teams_in_comp(age, division)
-    teams = Team.where(:age_group => age, :division => division)
+  def get_teams_in_comp(age_group, division)
+    teams = Team.where(:age_group => age_group, :division => division)
   end
 
-  def get_standings(age, division, round_limit=0) #TODO: use round limit to check change in positions for visual highlighting
-    teams = get_teams_in_comp(age, division) #array of ids in specific comp
+  def get_ladder(age_group, division, round_limit=0) #TODO: use round limit to check change in positions for visual highlighting
+    teams = get_teams_in_comp(age_group, division) #array of ids in specific comp
     teams = Hash[teams.collect { |t| #new hash with team_ids as keys, values are hash with keys set to zero
        [
          t.id, #team_id
@@ -25,7 +25,7 @@ module ApplicationHelper
     }]
 
     #parse matches
-    matches = Match.where :age_group=> age, :division=> division
+    matches = Match.get_matches(age_group, division, false, 'results')
     matches.each do |m|
       if m.home_score == m.away_score #draw
 

@@ -19,4 +19,9 @@ class Team < ActiveRecord::Base
   def name #to simply get the team name + identifier (e.g. "blue"), if it exists
     "#{self.club.name}#{" " + self.identifier if self.identifier.present?}"
   end
+
+  def ladder_position
+    ladder = ApplicationController.helpers.get_ladder(self.age_group, self.division)
+    ladder.index(ladder.detect{|id, hash| self.id == id}) + 1
+  end
 end

@@ -64,6 +64,12 @@ m3 = Match.create! :round=> 5, :game_date=> "2019-06-15 00:00:00.000", :age_grou
 m4 = Match.create! :round=> 12, :game_date=> "2019-12-14 13:00:00.000", :age_group=> 'SL', :division=> '1'
 m5 = Match.create! :round=> 12, :game_date=> "2019-12-14 17:00:00.000", :age_group=> 'SL', :division=> '1'
 m6 = Match.create! :round=> 12, :game_date=> "2019-12-15 15:00:00.000", :age_group=> 'SL', :division=> '1'
+
+m7 = Match.create! :round=> 12, :game_date=> "2019-12-31 11:00:00.000", :age_group=> 'AA', :division=> '1'
+m8 = Match.create! :round=> 12, :game_date=> "2019-12-31 13:00:00.000", :age_group=> 'AA', :division=> '1'
+m9 = Match.create! :round=> 12, :game_date=> "2019-12-31 15:00:00.000", :age_group=> 'AA', :division=> '1'
+
+
 puts "created #{Match.count} matches"
 
 #ASSOCIATIONS
@@ -76,9 +82,9 @@ c9.teams << t5
 c28.teams << t6
 puts "associated teams to clubs"
 
-g1.matches << m1 << m4
-g2.matches << m2 << m5
-g3.matches << m3 << m6
+g1.matches << m1 << m4 << m7
+g2.matches << m2 << m5 << m8
+g3.matches << m3 << m6 << m9
 puts "associated matches to grounds"
 
 t1.users << u1
@@ -109,4 +115,14 @@ m5.save
 m6.home_id = t6.id
 m6.away_id = t4.id
 m6.save
+
+m7.home_id = t2.id
+m7.away_id = t1.id
+m7.save
+m8.home_id = t3.id
+m8.away_id = t2.id
+m8.save
+m9.home_id = t1.id
+m9.away_id = t3.id
+m9.save
 puts "associated home and away teams to matches"
