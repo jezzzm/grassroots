@@ -59,7 +59,7 @@ puts "created #{Ground.count} grounds"
 Match.destroy_all
 m1 = Match.create! :round=> 1, :game_date=> "2019-04-13 00:00:00.000", :age_group=> 'AA', :division=> '1', :home_score=> 3, :away_score=> 2
 m2 = Match.create! :round=> 1, :game_date=> "2019-04-13 00:00:00.000", :age_group=> 'AA', :division=> '1', :home_score=> 0, :away_score=> 1
-m3 = Match.create! :round=> 5, :game_date=> "2019-06-15 00:00:00.000", :age_group=> 'AA', :division=> '1', :home_score=> 1, :away_score=> 5
+m3 = Match.create! :round=> 2, :game_date=> "2019-06-15 00:00:00.000", :age_group=> 'AA', :division=> '1', :home_score=> 1, :away_score=> 5
 
 m4 = Match.create! :round=> 12, :game_date=> "2019-12-14 13:00:00.000", :age_group=> 'SL', :division=> '1'
 m5 = Match.create! :round=> 12, :game_date=> "2019-12-14 17:00:00.000", :age_group=> 'SL', :division=> '1'

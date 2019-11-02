@@ -1,0 +1,32 @@
+<h2>Results</h2> <!-- results -->
+
+<table>
+  <thead>
+    <tr>
+      <th class="left-align">Date</th>
+      <th class="left-align">Time</th>
+      <th class="left-align">Ground</th>
+      <th>Comp</th>
+      <th class="right-align">Home Team</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th class="left-align">Away Team</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% results.each do |m| %>
+    <tr>
+      <td class="left-align"><%= m.game_date.strftime('%a, %b %e') %></td>
+      <td class="left-align"><%= m.game_date.strftime('%l:%M%P') %></td>
+      <td class="left-align"><%= link_to(m.ground.name, ground_path(m.ground.id)) %></td>
+      <td><%= link_to("#{m.age_group}/#{m.division}", division_path(m.age_group, m.division)) %></td>
+      <td class="right-align"><%= link_to(m.home_team.name, team_path(m.home_id))  %></td>
+      <td><%= m.home_score %></td>
+      <td>:</td>
+      <td><%= m.away_score %></td>
+      <td class="left-align"><%= link_to(m.away_team.name, team_path(m.away_id)) %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

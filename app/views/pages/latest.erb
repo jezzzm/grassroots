@@ -1,29 +1,5 @@
-<h2>Latest Results</h2>
+<h1>Non-User Homepage</h1>
 
-<!-- Date | Age group/Div | Ground | Home Team | Home Score | Away Score | Away Team -->
-<% @results.each do |m| %>
-  <ul>
-    <li>Date: <%= m.game_date.strftime('%l:%M%P, %A, %B %e, %Y') %></li>
-    <li>Comp: <%= m.age_group %>/<%= m.division %></li>
-    <li>Home Team: <%= m.home_team.name %></li>
-    <li>Home Score: <%= m.home_score %></li>
-    <li>Away Score: <%= m.away_score %></li>
-    <li>Away Team: <%= m.away_team.name %></li>
-    <li>Ground: <%= m.ground.name %></li>
+<%= render "/partials/results", :results=> @results %>
 
-  </ul>
-<% end %>
-
-
-<h2>upcoming fixtures</h2>
-<% @fixtures.each do |m| %>
-  <ul>
-    <li>Date: <%= m.game_date.strftime('%l:%M%P, %A, %B %e, %Y') %></li>
-    <li>Comp: <%= m.age_group %>/<%= m.division %></li>
-    <li>Home Team: <%= m.home_team.name %></li>
-    
-    <li>Away Team: <%= m.away_team.name %></li>
-    <li>Ground: <%= m.ground.name %></li>
-
-  </ul>
-<% end %>
+<%= render "/partials/fixtures", :fixtures=> @fixtures %>

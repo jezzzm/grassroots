@@ -1,56 +1,7 @@
-<h2>division dash</h2>
+<%= render "/partials/current_path_links", :age_group=> @age_group, :division=> @division, :h=>2, :suffix=> 'Dashboard' %>
 
-<h2>ladder</h2>
-<div class="standings">
-  <!-- also check here https://stackoverflow.com/questions/19848697/css-grid-where-one-column-shrinks-to-fit-content-the-other-fills-the-remaning-s -->
+<%= render "/partials/ladder", :age_group=> @age_group, :division=> @division %>
 
-  <span><strong>Position</strong></span>
-  <span><strong>Team</strong></span>
-  <span><strong>MP</strong></span>
-  <span><strong>W</strong></span>
-  <span><strong>D</strong></span>
-  <span><strong>L</strong></span>
-  <span><strong>GF</strong></span>
-  <span><strong>GA</strong></span>
-  <span><strong>GD</strong></span>
-  <span><strong>Points</strong></span>
-  <!-- <span><strong>Form</strong></span>  change grid cols to 11 with form-->
-  <% get_ladder(@age_group, @division).each_with_index do |t, i| %>
-    <span><%= i + 1 %></span>
-    <span><%= t[1][:name] %></span>
-    <span><%= t[1][:mp] %></span>
-    <span><%= t[1][:w] %></span>
-    <span><%= t[1][:l] %></span>
-    <span><%= t[1][:d] %></span>
-    <span><%= t[1][:gf] %></span>
-    <span><%= t[1][:ga] %></span>
-    <span><%= t[1][:gd] %></span>
-    <span><%= t[1][:pts] %></span>
-    <!-- <span><%= t[1][:form] %></span>-->
-  <% end %>
+<%= render "/partials/results", :results=> @results %>
 
-</div>
-
-<h2>fixtures</h2>
-<% @fixtures.each do |m| %>
-  <ul>
-    <li>Date: <%= m.game_date.strftime('%l:%M%P, %A, %B %e, %Y') %></li>
-    <li>Comp: <%= m.age_group %>/<%= m.division %></li>
-    <li>Home Team: <%= m.home_team.name %> (Ladder: <%= m.home_team.ladder_position %>)</li>
-    <li>Away Team: <%= m.away_team.name %> (Ladder: <%= m.away_team.ladder_position %>)</li>
-    <li>Ground: <%= m.ground.name %></li>
-  </ul>
-<% end %>
-
-<h2>results</h2>
-<% @results.each do |m| %>
-  <ul>
-    <li>Date: <%= m.game_date.strftime('%l:%M%P, %A, %B %e, %Y') %></li>
-    <li>Comp: <%= m.age_group %>/<%= m.division %></li>
-    <li>Home Team: <%= m.home_team.name %></li>
-    <li>Home Score: <%= m.home_score %></li>
-    <li>Away Score: <%= m.away_score %></li>
-    <li>Away Team: <%= m.away_team.name %></li>
-    <li>Ground: <%= m.ground.name %></li>
-  </ul>
-<% end %>
+<%= render "/partials/fixtures", :fixtures=> @fixtures %>

@@ -1,0 +1,41 @@
+<h2>Ladder</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>#</th>
+      <th class="left-align">Team</th>
+      <th>MP</th>
+      <th>W</th>
+      <th>L</th>
+      <th>D</th>
+      <th>GF</th>
+      <th>GA</th>
+      <th>GD</th>
+      <th>Points</th>
+      <th>Form</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% get_ladder(age_group, division).each_with_index do |t, i| %>
+    <tr>
+      <td><%= i + 1 %></td>
+      <td class="left-align"><%= link_to(t[1][:name], team_path(t[0])) %></td>
+      <td><%= t[1][:mp] %></td>
+      <td><%= t[1][:w] %></td>
+      <td><%= t[1][:l] %></td>
+      <td><%= t[1][:d] %></td>
+      <td><%= t[1][:gf] %></td>
+      <td><%= t[1][:ga] %></td>
+      <td><%= t[1][:gd] %></td>
+      <td><%= t[1][:pts] %></td>
+      <td>
+        <% form = Team.find(t[0]).form %>
+        <% form.each do |f| %>
+          <%= link_to(f[1], match_path(f[0]), :class=> "form-#{f[1].downcase}") %>
+        <% end %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

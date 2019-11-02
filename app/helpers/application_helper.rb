@@ -19,7 +19,6 @@ module ApplicationHelper
           :ga => 0, #goals against
           :gd => 0, #goal difference
           :pts => 0, #points (3 for win, 1 for draw, 0 for loss)
-          :form => [] # TODO: form (WLDWL etc)
         }
       ]
     }]
@@ -31,27 +30,21 @@ module ApplicationHelper
 
         teams[m.home_id][:d] += 1
         teams[m.home_id][:pts] += 1
-        teams[m.home_id][:form] << [m.game_date, 'D']
 
         teams[m.away_id][:d] += 1
         teams[m.away_id][:pts] += 1
-        teams[m.away_id][:form] << [m.game_date, 'D']
 
       elsif m.home_score > m.away_score #home win
         teams[m.home_id][:w] += 1
         teams[m.home_id][:pts] += 3
-        teams[m.home_id][:form] << [m.game_date, 'W']
 
         teams[m.away_id][:l] += 1
-        teams[m.away_id][:form] << [m.game_date, 'L']
 
       else #away win
         teams[m.home_id][:l] += 1
-        teams[m.home_id][:form] << [m.game_date, 'L']
 
         teams[m.away_id][:w] += 1
         teams[m.away_id][:pts] += 3
-        teams[m.away_id][:form] << [m.game_date, 'W']
       end
 
       teams[m.home_id][:mp] += 1
@@ -65,6 +58,21 @@ module ApplicationHelper
       teams[m.away_id][:gd] = teams[m.away_id][:gf] - teams[m.away_id][:ga]
 
     end
-    teams.sort_by {|id, team| [team[:pts]*-1, team[:gd]*-1, team[:gf]*-1]} #https://codereview.stackexchange.com/questions/52062/a-ruby-sorting-program-for-multiple-criteria
+    teams.sort_by {|id, team| [team[:pts]*-1, team[:gd]*-1, team[:gf]*-1, team[:gc]]} #https://codereview.stackexchange.com/questions/52062/a-ruby-sorting-program-for-multiple-criteria
+  end
+
+  def determine_result(match_id, this_team_id)
+    match = Match.find match_id
+    if match.home_id == this_team_id
+      return 'D' if match.home_score == match.away_score
+      return 'W' if match.home_score > match.away_score
+      return 'L' if match.home_score < match.away_score
+    elsif match.away_id == this_team_id
+      return 'D' if match.home_score == match.away_score
+      return 'W' if match.home_score < match.away_score
+      return 'L' if match.home_score > match.away_score
+    else
+      "didn't play this match"
+    end
   end
 end
