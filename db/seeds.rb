@@ -25,7 +25,7 @@ c22 = Club.create :short_sign=> 'STA', :name=> 'Eastwood St Andrews AFC'
 c23 = Club.create :short_sign=> 'NER', :name=> 'North Epping Rangers SC'
 c24 = Club.create :short_sign=> 'BEE', :name=> 'Beecroft FC'
 c25 = Club.create :short_sign=> 'HWK', :name=> 'Hills Hawks FC'
-c26 = Club.create :short_sign=> 'BYE', :name=> '~~BYE~~' #TODO: how to deal with byes better? This is how it was done in the existing system
+# c26 = Club.create :short_sign=> 'BYE', :name=> '~~BYE~~' #TODO: how to deal with byes better? This is how it was done in the existing system
 c27 = Club.create :short_sign=> 'ARA', :name=> 'Ararat FC'
 c28 = Club.create :short_sign=> 'NHF', :name=> 'Northern HFC'
 c29 = Club.create :short_sign=> 'PFC', :name=> 'Putney FC'
@@ -34,6 +34,61 @@ c31 = Club.create :short_sign=> 'STU', :name=> 'Ryde Saints Utd FC'
 c32 = Club.create :short_sign=> 'STP', :name=> 'St Patricks FC'
 puts "created #{Club.count} clubs"
 
+def generate_matchups(team_ids)
+  # |_1_| 2 3 4 5  | 1 stays in place, 2 => 5 => 10 => 6 => 2 rotate clockwise. matchup is vertical pairs
+  # | 6   7 8 9 10 |
+  team_ids << 0 if team_ids.size.odd? # add bye (0 placeholder) if odd no. of teams in array
+  len = team_ids.size
+  top_row = team_ids.take(len/2)
+  first = top_row.shift
+  bottom_row = team_ids.drop(len/2)
+
+  matchups = []
+  (len * 2 - 2).times do |r| #draw generation algo (hardcoded for 10 team comp)
+    round = []
+    r.odd? ? round << [first, bottom_row.first] : round << [bottom_row.first, first]
+    (0..top_row.size - 1).each do |i|
+      r.even? ? round << [top_row[i], bottom_row[i + 1]] : round << [bottom_row[i + 1], top_row[i]]
+    end
+    matchups << round
+    bottom_row << top_row.pop
+    top_row.unshift bottom_row.shift
+  end
+  matchups
+end
+
+def generate_random_data #division 3 over 35s is complete test data
+  identifiers = %w(Red Blue Green Yellow Wombats Possums Kangas Slugs)
+  these_teams = [] #array containing ids
+  10.times do |i|
+    used_clubs = Team.all.map {|t| t.club}
+    t = Team.create :division=> "3", :age_group => 'O35'
+    t.identifier = identifiers.sample if rand(0..4) == 2
+    c = Club.order("RANDOM()").first
+    while used_clubs.include? c
+      c = Club.order("RANDOM()").first
+    end
+    c.teams << t
+    these_teams << t.id
+  end
+
+  times = ["11:00:00.000", "13:00:00.000", "15:00:00.000", "17:00:00.000"]
+  start_date = "2019-03-30"
+  test = generate_matchups(these_teams)
+  18.times do |i|
+    5.times do |j|
+      m = Match.create(:round=> "#{i + 1}", :game_date=> "#{Date.parse(start_date) + 7 * i} #{times.sample}", :age_group=> "O35", :division=> "3")
+      m.home_id = test[i][j][0]
+      m.away_id = test[i][j][1]
+      m.home_score = rand(5)
+      m.away_score = rand(5)
+      Ground.order("RANDOM()").first.matches << m
+      m.save
+    end
+  end
+  binding.pry
+
+end
 
 User.destroy_all
 u1 = User.create :email=> "jez.milledge@gmail.com", :name=> "Jeremy Milledge", :password => 'chicken', :admin=> true
@@ -41,6 +96,7 @@ u2 = User.create :email=> "jt@ga.co", :name=> "JT", :password => 'chicken', :adm
 puts "created #{User.count} users"
 
 Team.destroy_all
+
 t1 = Team.create :division=> "1", :age_group=> 'AA', :identifier=> 'Blue'
 t2 = Team.create :division=> "1", :age_group=> 'AA'
 t3 = Team.create :division=> "1", :age_group=> 'AA'
@@ -54,6 +110,10 @@ Ground.destroy_all
 g1 = Ground.create :short_sign=> 'ARCAD', :name=> "Arcadia Park", :latitude=> -33.617426, :longitude=> 151.057809
 g2 = Ground.create :short_sign=> 'CP', :name=> "Christie Park", :latitude=> -33.771386, :longitude=> 151.118809
 g3 = Ground.create :short_sign=> 'JAMES', :name=> "James Henty Drive Oval", :latitude=> -33.711862, :longitude=> 151.030346
+g4 = Ground.create :short_sign=> 'BILLM', :name=> "Bill Mitchell Park", :latitude=> -33.831950, :longitude=> 151.119360
+g5 = Ground.create :short_sign=> 'CARL', :name=> "Carlingford Oval", :latitude=> -33.764173, :longitude=> 151.049980
+g6 = Ground.create :short_sign=> 'RIVER', :name=> "Riverglad Reserve", :latitude=> -33.837167, :longitude=> 151.139933
+g7 = Ground.create :short_sign=> 'TYAG', :name=> "Tyagarah Park", :latitude=> -33.823708, :longitude=> 151.115044
 puts "created #{Ground.count} grounds"
 
 Match.destroy_all
@@ -126,3 +186,5 @@ m9.home_id = t1.id
 m9.away_id = t3.id
 m9.save
 puts "associated home and away teams to matches"
+
+generate_random_data

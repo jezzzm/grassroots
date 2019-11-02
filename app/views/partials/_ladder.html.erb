@@ -28,11 +28,11 @@
       <td><%= t[1][:gf] %></td>
       <td><%= t[1][:ga] %></td>
       <td><%= t[1][:gd] %></td>
-      <td><%= t[1][:pts] %></td>
-      <td>
+      <td class="table-highlight"><%= t[1][:pts] %></td>
+      <td class="form-container">
         <% form = Team.find(t[0]).form %>
         <% form.each do |f| %>
-          <%= link_to(f[1], match_path(f[0]), :class=> "form-#{f[1].downcase}") %>
+          <%= link_to(f[1], match_path(f[0]), :class=> "form-icon form-#{f[1].downcase}") %>
         <% end %>
       </td>
     </tr>

@@ -1,3 +1,7 @@
+body {
+  width: 100%;
+  max-width: 1156px;
+}
 td, th {
   text-align: center;
 }
@@ -18,4 +22,39 @@ td, th {
 }
 .right-align {
   text-align:right;
+}
+
+.form-icon {
+  width: 25px;
+  height: 25px;
+  display:inline-block;
+  border-radius: 50%;
+  color: #222;
+  text-align: center;
+  font-family: monospace;
+  font-size: 18px;
+  box-shadow: inset -2px -2px 2px rgba(0,0,0,0.3),
+              inset 2px 2px 2px rgba(255,255,255,0.3);
+  /* transition: 0.3s all; */
+}
+.form-icon:hover {
+  text-decoration: none;
+  box-shadow: none;
+}
+
+.form-w {
+  background: #7cf17d;
+}
+.form-l {
+  background: #ce7e7e;
+}
+.form-d {
+  background: #e3e0b2;
+}
+.form-container {
+  width: 150px;
+}
+.table-highlight {
+  font-weight: bold;
+  color: #facb6e;
 }
