@@ -14,7 +14,7 @@ c11 = Club.create :short_sign=> 'WRE', :name=> 'West Ryde Eagles SC'
 c12 = Club.create :short_sign=> 'WRE', :name=> 'West Ryde Eagles SC'
 c13 = Club.create :short_sign=> 'RED', :name=> 'Redbacks FC'
 c14 = Club.create :short_sign=> 'HCC', :name=> 'Holy Cross College SC'
-c15 = Club.create :short_sign=> 'WPH', :name=> 'West Pennant Hills Cherrybrook Football Club'
+c15 = Club.create :short_sign=> 'WPH', :name=> 'WPH Cherrybrook FC'
 c16 = Club.create :short_sign=> 'RAV', :name=> 'Gladesville Ravens SC'
 c17 = Club.create :short_sign=> 'THL', :name=> 'Thornleigh FC'
 c18 = Club.create :short_sign=> 'NMH', :name=> 'Normanhurst FC'
@@ -33,6 +33,16 @@ c30 = Club.create :short_sign=> 'RFL', :name=> 'Redfield Lions'
 c31 = Club.create :short_sign=> 'STU', :name=> 'Ryde Saints Utd FC'
 c32 = Club.create :short_sign=> 'STP', :name=> 'St Patricks FC'
 puts "created #{Club.count} clubs"
+
+Ground.destroy_all
+g1 = Ground.create :short_sign=> 'ARCAD', :name=> "Arcadia Park", :latitude=> -33.617426, :longitude=> 151.057809
+g2 = Ground.create :short_sign=> 'CP', :name=> "Christie Park", :latitude=> -33.771386, :longitude=> 151.118809
+g3 = Ground.create :short_sign=> 'JAMES', :name=> "James Henty Drive Oval", :latitude=> -33.711862, :longitude=> 151.030346
+g4 = Ground.create :short_sign=> 'BILLM', :name=> "Bill Mitchell Park", :latitude=> -33.831950, :longitude=> 151.119360
+g5 = Ground.create :short_sign=> 'CARL', :name=> "Carlingford Oval", :latitude=> -33.764173, :longitude=> 151.049980
+g6 = Ground.create :short_sign=> 'RIVER', :name=> "Riverglad Reserve", :latitude=> -33.837167, :longitude=> 151.139933
+g7 = Ground.create :short_sign=> 'TYAG', :name=> "Tyagarah Park", :latitude=> -33.823708, :longitude=> 151.115044
+puts "created #{Ground.count} grounds"
 
 def generate_matchups(team_ids)
   # |_1_| 2 3 4 5  | 1 stays in place, 2 => 5 => 10 => 6 => 2 rotate clockwise. matchup is vertical pairs
@@ -57,13 +67,13 @@ def generate_matchups(team_ids)
   matchups
 end
 
-def generate_random_data #division 3 over 35s is complete test data
-  identifiers = %w(Red Blue Green Yellow Wombats Possums Kangas Slugs)
+def generate_random_data(age_group, division, team_count=10, start_date="2019-03-30")
+  identifiers = %w(Red Blue Green Yellow Wombats Possums Kangas Slugs Kittens Cats Cats Pink Lilac)
   these_teams = [] #array containing ids
-  10.times do |i|
-    used_clubs = Team.all.map {|t| t.club}
-    t = Team.create :division=> "3", :age_group => 'O35'
-    t.identifier = identifiers.sample if rand(0..4) == 2
+  team_count.times do |i|
+    used_clubs = Team.where(:division=> division, :age_group => age_group).map {|t| t.club}
+    t = Team.create :division=> division, :age_group => age_group
+    t.identifier = identifiers.sample if rand(4) == 2
     c = Club.order("RANDOM()").first
     while used_clubs.include? c
       c = Club.order("RANDOM()").first
@@ -73,20 +83,19 @@ def generate_random_data #division 3 over 35s is complete test data
   end
 
   times = ["11:00:00.000", "13:00:00.000", "15:00:00.000", "17:00:00.000"]
-  start_date = "2019-03-30"
-  test = generate_matchups(these_teams)
-  18.times do |i|
-    5.times do |j|
-      m = Match.create(:round=> "#{i + 1}", :game_date=> "#{Date.parse(start_date) + 7 * i} #{times.sample}", :age_group=> "O35", :division=> "3")
-      m.home_id = test[i][j][0]
-      m.away_id = test[i][j][1]
-      m.home_score = rand(5)
-      m.away_score = rand(5)
+  matchups = generate_matchups(these_teams)
+  (team_count * 2 - 2).times do |i|
+    (team_count/2).times do |j|
+      m = Match.create(:round=> "#{i + 1}", :game_date=> "#{Date.parse(start_date) + 7 * i + rand(2)} #{times.sample}", :age_group=> age_group, :division=> division)
+      m.home_id = matchups[i][j][0]
+      m.away_id = matchups[i][j][1]
+      m.home_score = rand(6) if m.game_date < Time.now
+      m.away_score = rand(6) if m.game_date < Time.now
       Ground.order("RANDOM()").first.matches << m
       m.save
     end
   end
-  binding.pry
+  # binding.pry
 
 end
 
@@ -96,95 +105,19 @@ u2 = User.create :email=> "jt@ga.co", :name=> "JT", :password => 'chicken', :adm
 puts "created #{User.count} users"
 
 Team.destroy_all
-
-t1 = Team.create :division=> "1", :age_group=> 'AA', :identifier=> 'Blue'
-t2 = Team.create :division=> "1", :age_group=> 'AA'
-t3 = Team.create :division=> "1", :age_group=> 'AA'
-
-t4 = Team.create :division=> "1", :age_group=> 'SL', :identifier=> 'Possums'
-t5 = Team.create :division=> "1", :age_group=> 'SL'
-t6 = Team.create :division=> "1", :age_group=> 'SL'
-puts "created #{Team.count} teams"
-
-Ground.destroy_all
-g1 = Ground.create :short_sign=> 'ARCAD', :name=> "Arcadia Park", :latitude=> -33.617426, :longitude=> 151.057809
-g2 = Ground.create :short_sign=> 'CP', :name=> "Christie Park", :latitude=> -33.771386, :longitude=> 151.118809
-g3 = Ground.create :short_sign=> 'JAMES', :name=> "James Henty Drive Oval", :latitude=> -33.711862, :longitude=> 151.030346
-g4 = Ground.create :short_sign=> 'BILLM', :name=> "Bill Mitchell Park", :latitude=> -33.831950, :longitude=> 151.119360
-g5 = Ground.create :short_sign=> 'CARL', :name=> "Carlingford Oval", :latitude=> -33.764173, :longitude=> 151.049980
-g6 = Ground.create :short_sign=> 'RIVER', :name=> "Riverglad Reserve", :latitude=> -33.837167, :longitude=> 151.139933
-g7 = Ground.create :short_sign=> 'TYAG', :name=> "Tyagarah Park", :latitude=> -33.823708, :longitude=> 151.115044
-puts "created #{Ground.count} grounds"
-
 Match.destroy_all
-m1 = Match.create! :round=> 1, :game_date=> "2019-04-13 00:00:00.000", :age_group=> 'AA', :division=> '1', :home_score=> 3, :away_score=> 2
-m2 = Match.create! :round=> 1, :game_date=> "2019-04-13 00:00:00.000", :age_group=> 'AA', :division=> '1', :home_score=> 0, :away_score=> 1
-m3 = Match.create! :round=> 2, :game_date=> "2019-06-15 00:00:00.000", :age_group=> 'AA', :division=> '1', :home_score=> 1, :away_score=> 5
+generate_random_data('O35', '3')
+generate_random_data('U21', '2', 12, "2019-08-17")
+generate_random_data('SL', '1', 12, "2019-07-27")
+generate_random_data('SL', '2', 12, "2019-07-27")
+generate_random_data('AA', '3', 10, "2019-09-28")
+generate_random_data('AA', '4', 10, "2019-09-28")
 
-m4 = Match.create! :round=> 12, :game_date=> "2019-12-14 13:00:00.000", :age_group=> 'SL', :division=> '1'
-m5 = Match.create! :round=> 12, :game_date=> "2019-12-14 17:00:00.000", :age_group=> 'SL', :division=> '1'
-m6 = Match.create! :round=> 12, :game_date=> "2019-12-15 15:00:00.000", :age_group=> 'SL', :division=> '1'
-
-m7 = Match.create! :round=> 12, :game_date=> "2019-12-31 11:00:00.000", :age_group=> 'AA', :division=> '1'
-m8 = Match.create! :round=> 12, :game_date=> "2019-12-31 13:00:00.000", :age_group=> 'AA', :division=> '1'
-m9 = Match.create! :round=> 12, :game_date=> "2019-12-31 15:00:00.000", :age_group=> 'AA', :division=> '1'
-
-
+puts "created #{Team.count} teams"
 puts "created #{Match.count} matches"
 
-#ASSOCIATIONS
-c2.teams << t1
-c21.teams << t2
-c5.teams << t3
-
-c6.teams << t4
-c9.teams << t5
-c28.teams << t6
-puts "associated teams to clubs"
-
-g1.matches << m1 << m4 << m7
-g2.matches << m2 << m5 << m8
-g3.matches << m3 << m6 << m9
-puts "associated matches to grounds"
-
-t1.users << u1
-t2.users << u1
-t3.users << u1 << u2
-
-t4.users << u1
-t5.users << u1
-t6.users << u2 << u1
-puts "associated m:n users and favourite teams"
-
-m1.home_id = t1.id
-m1.away_id = t2.id
-m1.save
-m2.home_id = t2.id
-m2.away_id = t3.id
-m2.save
-m3.home_id = t3.id
-m3.away_id = t1.id
-m3.save
-
-m4.home_id = t4.id
-m4.away_id = t5.id
-m4.save
-m5.home_id = t5.id
-m5.away_id = t6.id
-m5.save
-m6.home_id = t6.id
-m6.away_id = t4.id
-m6.save
-
-m7.home_id = t2.id
-m7.away_id = t1.id
-m7.save
-m8.home_id = t3.id
-m8.away_id = t2.id
-m8.save
-m9.home_id = t1.id
-m9.away_id = t3.id
-m9.save
-puts "associated home and away teams to matches"
-
-generate_random_data
+Team.first.users << u1
+Team.last.users << u2
+Team.order("RANDOM()").first.users << u1 << u2
+Team.order("RANDOM()").first.users << u1
+Team.order("RANDOM()").first.users << u2

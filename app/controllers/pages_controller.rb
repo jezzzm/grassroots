@@ -23,4 +23,10 @@ class PagesController < ApplicationController
     end
   end
 
+  def age_group
+    @age_group = params[:age_group]
+    @teams = Team.where(:age_group=> @age_group)
+    @divisions = @teams.pluck(:division).uniq.sort
+  end
+
 end

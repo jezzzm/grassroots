@@ -1,1 +1,6 @@
-<h2>age group dash</h2>
+<h2>Dashboard for <%= @age_group %></h2>
+
+<h2>Divisions</h2>
+<% @divisions.each do |d| %>
+  <p><%= link_to("Division #{d}", division_path(@age_group, d)) %></p>
+<% end %>

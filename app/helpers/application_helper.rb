@@ -52,7 +52,7 @@ module ApplicationHelper
       teams[m.home_id][:ga] += m.away_score
       teams[m.home_id][:gd] = teams[m.home_id][:gf] - teams[m.home_id][:ga]
 
-      teams[m.home_id][:mp] += 1
+      teams[m.away_id][:mp] += 1
       teams[m.away_id][:gf] += m.away_score
       teams[m.away_id][:ga] += m.home_score
       teams[m.away_id][:gd] = teams[m.away_id][:gf] - teams[m.away_id][:ga]
