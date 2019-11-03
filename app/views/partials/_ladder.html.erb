@@ -31,8 +31,19 @@
       <td class="table-highlight"><%= t[1][:pts] %></td>
       <td class="form-container">
         <% form = Team.find(t[0]).form %>
+
         <% form.each do |f| %>
-          <%= link_to(f[1], match_path(f[0]), :class=> "form-icon form-#{f[1].downcase}") %>
+          <% match = Match.find f[0] %>
+          <a href="<%= match_path(f[0]) %>" class="form-icon form-<%= f[1].downcase %>">
+            <%= f[1] %>
+            <span class="form-hover-detail">
+              <%= match.home_team.club.short_sign %>
+              <%= match.home_score %> :
+              <%= match.away_score %>
+              <%= match.away_team.club.short_sign %>
+            </span>
+          </a>
+
         <% end %>
       </td>
     </tr>
