@@ -1,0 +1,41 @@
+<h1>Dashboard for <%= @current_user.email %></h1>
+<% @teams.each do |t| %>
+  <article class="team-tile">
+    <h3><%= t.age_group %> / <%= t.division %> : <%= link_to t.name, t %></h3>
+    <div class="dash-flex-info">
+      <div class="next-game">
+        <h4>Next Game</h4>
+        <% unless next_match(t).nil? %>
+          <% n = next_match(t) %>
+          <p><%= long_date_time n %></p>
+          <p><%= link_to n.ground.name, n.ground %></p>
+          <% opponent = other_team n, t.id %>
+          <p>Versus <%= link_to opponent.name, opponent %></p>
+        <% else %>
+          <p>No games scheduled.</p>
+        <% end %>
+      </div>
+      <div class="latest-result">
+        <h4>Latest Result</h4>
+        <% unless last_match(t).nil? %>
+          <% l = last_match(t) %>
+
+          <%= link_to(l.home_team.name, team_path(l.home_id), :class => team_classes(team_id: l.home_id, page_team_id: t.id, home: true)) %>
+          <%= l.home_score %>
+          :
+          <%= l.away_score %>
+          <%= link_to(l.away_team.name, team_path(l.away_id), :class => team_classes(team_id: l.away_id, page_team_id: t.id)) %>
+          <p>Played on <%= short_date l %> at <%= link_to l.ground.name, l.ground %></p>
+        <% else %>
+          <p>No games played this season.</p>
+        <% end %>
+      </div>
+      <div class="table">
+        <h4>Competition Info</h4>
+        <%= render "/partials/ladder", :age_group=> t.age_group, :division=> t.division, :specific_team=> t.id %>
+      </div>
+
+    </div>
+  </article>
+
+<% end %>

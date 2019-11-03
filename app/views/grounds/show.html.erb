@@ -1,2 +1,8 @@
-<h1>Ground#show</h1>
-<p>Find me in app/views/ground/show.html.erb</p>
+<h3><%= link_to "Grounds Index", grounds_path %></h3>
+<h1><%= @ground.name %></h1>
+
+<p><strong>Short Sign:</strong> <%= @ground.short_sign %></p>
+<p><strong>Latitude:</strong> <%= @ground.latitude %></p>
+<p><strong>Longitude:</strong> <%= @ground.longitude %></p>
+
+<iframe class="osm" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.openstreetmap.org/export/embed.html?bbox=<%= @ground.longitude %>%2C<%= @ground.latitude %>%2C<%= @ground.longitude %>%2C<%= @ground.latitude %>&amp;layer=mapnik" style="border: 1px solid black"></iframe><br/><small><a href="https://www.openstreetmap.org/#map=17/-33.86907/151.17408">View Larger Map</a></small>

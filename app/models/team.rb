@@ -4,16 +4,18 @@ class Team < ActiveRecord::Base
 
   # method to replace "has_many :matches"
   # we use this to return result if team is either home or away
+
+  #INSTANCE METHODS
   def matches
     Match.where(:home_id => self.id).or(Match.where(:away_id => self.id))
   end
 
   def results
-    self.matches.where('game_date < ?', Time.now)
+    self.matches.where('game_date < ?', Time.now).where.not(:home_score => nil).order(:game_date=> :desc)
   end
 
   def fixtures
-    self.matches.where('game_date > ?', Time.now)
+    self.matches.where('game_date > ?', Time.now).order(:game_date)
   end
 
   def home_matches
@@ -24,7 +26,7 @@ class Team < ActiveRecord::Base
     Match.where(:away_id => self.id)
   end
 
-  def name #to simply get the team name + identifier (e.g. "blue"), if it exists
+  def name #to simply get the team name + identifier (e.g. "blue"), if it exists as string
     "#{self.club.name}#{" " + self.identifier if self.identifier.present?}"
   end
 
@@ -38,6 +40,11 @@ class Team < ActiveRecord::Base
     # raise 'hell'
     matches.map! {|match_id| [match_id, ApplicationController.helpers.determine_result(match_id, self.id)]}.reverse!
 
+  end
+
+  #CLASS METHODS
+  def self.comp_teams(age_group, division)
+    self.where(:age_group => age_group, :division => division)
   end
 
 

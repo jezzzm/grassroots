@@ -8,7 +8,7 @@ class SessionController < ApplicationController
     #check if encrypted passwords match
     if user.present? && user.authenticate(params[:password])
       session[:user_id] = user.id #remember the user from this moment on, just the id, everything else comes from db
-      redirect_to root_path
+      redirect_to dashboard_path
     else
       flash[:error] = "Invalid email address or password" # only this page and one more
       redirect_to login_path # instead of render because we don't want it to be too easy to log in for a hacker

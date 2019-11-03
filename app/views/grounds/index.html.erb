@@ -1,2 +1,8 @@
-<h1>Ground#index</h1>
-<p>Find me in app/views/ground/index.html.erb</p>
+<h1>GHFA Grounds</h1>
+
+<% @grounds.each do |g| %>
+  <h3><%= link_to g.name, g %></h3>
+  <p><%= g.short_sign %></p>
+  <p><%= g.latitude %></p>
+  <p><%= g.longitude %></p>
+<% end %>

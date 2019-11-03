@@ -40,7 +40,7 @@ g2 = Ground.create :short_sign=> 'CP', :name=> "Christie Park", :latitude=> -33.
 g3 = Ground.create :short_sign=> 'JAMES', :name=> "James Henty Drive Oval", :latitude=> -33.711862, :longitude=> 151.030346
 g4 = Ground.create :short_sign=> 'BILLM', :name=> "Bill Mitchell Park", :latitude=> -33.831950, :longitude=> 151.119360
 g5 = Ground.create :short_sign=> 'CARL', :name=> "Carlingford Oval", :latitude=> -33.764173, :longitude=> 151.049980
-g6 = Ground.create :short_sign=> 'RIVER', :name=> "Riverglad Reserve", :latitude=> -33.837167, :longitude=> 151.139933
+g6 = Ground.create :short_sign=> 'RIVER', :name=> "Riverglade Reserve", :latitude=> -33.837167, :longitude=> 151.139933
 g7 = Ground.create :short_sign=> 'TYAG', :name=> "Tyagarah Park", :latitude=> -33.823708, :longitude=> 151.115044
 puts "created #{Ground.count} grounds"
 

@@ -10,18 +10,24 @@
       <th class="right-align">Home Team</th>
       <th></th>
       <th class="left-align">Away Team</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
     <% fixtures.each do |m| %>
     <tr>
-      <td class="left-align"><%= m.game_date.strftime('%a, %b %e') %></td>
-      <td class="left-align"><%= m.game_date.strftime('%l:%M%P') %></td>
+      <td class="left-align"><%= short_date m%></td>
+      <td class="left-align"><%= time_only m %></td>
       <td class="left-align"><%= link_to(m.ground.name, ground_path(m.ground.id)) %></td>
       <td><%= link_to("#{m.age_group}/#{m.division}", division_path(m.age_group, m.division)) %></td>
-      <td class="right-align"><%= link_to(m.home_team.name, team_path(m.home_id))  %></td>
+      <td class="right-align">
+        <%= link_to(m.home_team.name, team_path(m.home_id), :class => team_classes(team_id: m.home_id, home: true)) %>
+      </td>
       <td>vs.</td>
-      <td class="left-align"><%= link_to(m.away_team.name, team_path(m.away_id)) %></td>
+      <td class="left-align">
+        <%= link_to(m.away_team.name, team_path(m.away_id), :class => team_classes(team_id: m.away_id)) %>
+      </td>
+      <td class="right-align"><%= link_to("View →", match_path(m.id)) %></td>
     </tr>
     <% end %>
   </tbody>

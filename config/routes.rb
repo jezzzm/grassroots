@@ -11,11 +11,11 @@ Rails.application.routes.draw do
 
   resources :clubs, :only => [:index, :show]
 
-  resources :grounds, :only => [:show, :index]
+  resources :grounds, :only => [:show, :index, :new, :create]
 
   resources :matches
 
-
+  get '/dashboard' => 'pages#dashboard' , :as=> 'dashboard'#user-specific dash
 
 
   #login is not crud

@@ -17,6 +17,7 @@
         <% if @current_user.admin? %>
           <%= link_to "All Users", users_path %>
         <% end %>
+        <%= link_to "Dashboard", dashboard_path %>
         <%= link_to "Logout #{ @current_user.email}", login_path, :method=> 'delete' %>
       <% else %>
         <%= link_to "Sign Up", new_user_path %>
