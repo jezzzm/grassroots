@@ -4,12 +4,12 @@
   <% @favs.each do |f| %>
     <div class="row mt-5">
       <div class="col">
-        <h3>
+        <h2>
           <%= f.name if f.name.present? %> /
           <%= link_to f.team.age_group, age_group_path(f.team.age_group) %> /
           <%= link_to f.team.division, division_path(f.team.age_group, f.team.division) %> /
           <%= link_to f.team.name, f.team %>
-        </h3>
+        </h2>
       </div>
     </div>
     <div class="row my-4">

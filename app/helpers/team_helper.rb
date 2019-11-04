@@ -6,7 +6,7 @@ module TeamHelper
   def team_classes(team_id, home=false)
     classes = ""
     classes << "page-team " if params[:id].present? && params[:id].to_i == team_id
-    classes << "fav-team " if @current_user.present? && @current_user.teams.include?(team_id)
+    classes << "fav-team " if @current_user.present? && @current_user.teams.pluck(:id).include?(team_id)
     classes << "home-team " if home
     # raise 'hell'
     return classes

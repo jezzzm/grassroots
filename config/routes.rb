@@ -15,11 +15,11 @@ Rails.application.routes.draw do
   get 'sessions/destroy'
   root :to => 'pages#index'
 
-  resources :teams, :only => [:show]
+  resources :teams, :only => [:show, :new, :create]
 
   resources :users
 
-  resources :clubs, :only => [:index, :show]
+  resources :clubs, :only => [:index, :show, :new, :craete]
 
   resources :grounds, :only => [:show, :index, :new, :create]
 

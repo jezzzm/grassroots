@@ -43,6 +43,9 @@ td, th {
 .this-team, .page-team {
   font-weight: bold;
 }
+a.fav-team {
+  color: #343a40;
+}
 
 /* form hover match result popup */
 .form-hover-detail {
@@ -93,36 +96,13 @@ td, th {
 
 .table-highlight {
   font-weight: bold;
-  // color: #facb6e;
 }
 
 .osm {
   width: 100%;
   height: 40em;
 }
-.team-tile {
-  // // background: rgba(0,0,0,0.15);
-  // padding: 1em;
-  // margin-bottom: 2em;
-}
-// .dash-info {
-//   display: grid;
-//   grid-template-columns: 1fr 1fr 600px;
-// }
 
-// .dash-info  h4 {
-//   padding-bottom:0.5em;
-//   border-bottom: 1px solid #dbdbdb;
-// }
-
-.dash-latest-result {
-  /* margin: 0 1em */
-}
-.dash-table {
-  // width: 600px;
-  // flex-shrink: 0;
-  // margin-top: calc(1.33em - 4px);
-}
 .compact tr {
   color: #ccc;
 }
@@ -158,6 +138,10 @@ td, th {
   left: 50%;
 }
 h5.card-subtitle .result-score {
-  padding: 0.2rem;
+  padding: 0.2rem 0;
   font-size: 90%;
+  min-width: 4.4rem;
+}
+h5.card-subtitle .result-score span {
+  padding: 0;
 }
