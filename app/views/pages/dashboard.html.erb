@@ -1,4 +1,4 @@
-<h1>Dashboard for <%= @current_user.email %></h1>
+<h1>Dashboard</h1>
 
 
   <% @favs.each do |f| %>
@@ -29,7 +29,7 @@
                 at
                 <%= link_to n.ground.name, n.ground %>
               </h5>
-              <p><%= long_date_time n.game_date %></p>
+              <p class="mt-3"><%= long_date_time n.game_date %></p>
               <%= link_to "Preview", match_path(n), :class=> 'btn btn-primary' %>
             <% else %>
               <h5 class="card-subtitle">No games scheduled.</h5>
@@ -51,16 +51,14 @@
                 <% l = last_match(f.team) %>
 
                 <%= link_to(l.home_team.name, team_path(l.home_id), :class => team_classes(team_id: l.home_id, home: true)) %>
-                <%= l.home_score %>
-                :
-                <%= l.away_score %>
+                <%= render "/partials/score", :home_score=> l.home_score, :away_score=> l.away_score %>
                 <%= link_to(l.away_team.name, team_path(l.away_id), :class => team_classes(team_id: l.away_id)) %>
             </h5>
 
-              <p>Played on <%= short_date l.game_date %> at <%= link_to l.ground.name, l.ground %></p>
+              <p class="mt-3">Played on <%= short_date l.game_date %> at <%= link_to l.ground.name, l.ground %></p>
               <%= link_to "Review", match_path(l), :class=> 'btn btn-primary' %>
             <% else %>
-              <p>No games played this season.</p>
+              <h5 class="card-subtitle">No games played this season.</h5>
             <% end %>
           </div>
 

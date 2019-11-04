@@ -1,0 +1,15 @@
+<div class="form-container">
+  <% form = team.form %>
+  <% form_key = {'W'=> 'Won', 'L'=> 'Lost', 'D'=> 'Drew'} %>
+  <% form.each do |f| %>
+    <% m = Match.find f[0] %>
+    <a href="<%= match_path(f[0]) %>" class="form-icon form-<%= f[1].downcase %>">
+      <abbr title="<%= form_key[f[1]] %>"><%= f[1] %></abbr>
+      <span class="form-hover-detail">
+        <%= m.home_team.club.short_sign %>
+        <%= render "/partials/score", :home_score=> m.home_score, :away_score=> m.away_score %>
+        <%= m.away_team.club.short_sign %>
+      </span>
+    </a>
+  <% end %>
+</div>

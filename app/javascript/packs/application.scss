@@ -10,25 +10,34 @@ td, th {
 .right-align {
   text-align:right;
 }
-
+.form-container {
+  width: 12rem;
+  min-width:12rem;
+  margin: 0 auto;
+}
 .form-icon {
-  width: 25px;
-  height: 25px;
+  width: 1.9rem;
+  height: 1.9rem;
+  line-height: 1.9rem;
+  font-size: 0.85rem;
   display:inline-block;
   position: relative;
-  border-radius: 50%;
-  color: #222;
+  border-radius: 100%;
+  color: #fff;
   text-align: center;
-  font-family: monospace;
-  font-size: 18px;
-
+  // font-family: monospace;
+  // font-size: 18px;
 }
 .form-icon strong {
-  color: #222;
+  // color: #222;
 }
-.form-icon abbr, .form-icon a {
+.form-icon abbr, a.form-icon {
   text-decoration: none;
   font-weight: normal;
+}
+.form-icon abbr:hover, a.form-icon:hover {
+  text-decoration: none;
+  color: #fff;
 }
 
 .this-team, .page-team {
@@ -41,10 +50,11 @@ td, th {
   opacity: 0;
   position: absolute;
   top: -60px;
-  width: 170px;
-  left: -130px;
-  background: rgba(255,255,255,1);
+  width: 200px;
+  left: -170px;
+  background: #f8f9fa;
   padding: 10px;
+  color: #212529;
   border-radius: 5px;
   box-shadow: 2px 2px 2px rgba(0,0,0,0.5);
 }
@@ -53,7 +63,7 @@ td, th {
   content: '';
   position: absolute;
   bottom: 0;
-  left: 140px;
+  left: 183px;
   width: 0;
   height: 0;
   border: 10px solid transparent;
@@ -69,21 +79,16 @@ td, th {
 }
 
 .form-w {
-  background: #7cf17d;
-  color: #308e31;
+  background: #28a745;
 }
 .form-l {
-  background: #ce7e7e;
-  color: #8b2121;
+  background: #dc3545;
 }
 .form-d {
-  background: #e3e0b2;
-  color: #454545;
+  // background: #ffc107;
+  background: #343a40;
 }
-.form-container {
-  width: 180px;
-  min-width:180px;
-}
+
 
 
 .table-highlight {
@@ -126,4 +131,33 @@ td, th {
 }
 .compact tr.fav-team a {
   font-weight: bold;
+}
+.result-score {
+  background: #007aff;
+  color: #fff;
+  padding: 0;
+  min-width: 4.6rem;
+  display: inline-block;
+  border-radius:0.4rem;
+  text-align: center;
+
+}
+.result-score span {
+  padding: 0 .6rem 0 .5rem;
+  position: relative;
+  color: #007aff;
+}
+.result-score span::before {
+  content: " ";
+  display: block;
+  width: .1rem;
+  height: 150%;
+  background: hsla(0,0%,100%,.2);
+  position: absolute;
+  top: -4px;
+  left: 50%;
+}
+h5.card-subtitle .result-score {
+  padding: 0.2rem;
+  font-size: 90%;
 }
