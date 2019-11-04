@@ -31,7 +31,7 @@ class PagesController < ApplicationController
 
   def dashboard
     if @current_user.present?
-      @teams = @current_user.teams
+      @favs = @current_user.favs
     else
       redirect_to(login_path)
     end

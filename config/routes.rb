@@ -7,8 +7,10 @@ Rails.application.routes.draw do
   get 'users/:id/favs/:fav_id/edit' => 'favs#edit', :as => 'edit_fav'
   get 'users/:id/favs/index' => 'favs#index', :as => 'favs'
   post 'users/:id/favs/index' => 'favs#create'
+  patch 'users/:id/favs/:fav_id' => 'favs#update', :as => 'update_fav'
   get 'favs/destroy'
-  get 'sessions/new'
+
+    get 'sessions/new'
   get 'sessions/create'
   get 'sessions/destroy'
   root :to => 'pages#index'

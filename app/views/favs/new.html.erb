@@ -1,10 +1,10 @@
-<h1>Add Favourite</h1>
+<h1>Add Favourite Team</h1>
 
 <%= form_for @fav do |f| %>
   <%= f.text_field :user_id, :value=> @user.id, :placeholder=> @user.name, :type=>'hidden' %>
   <%= f.label :team_id %>
   <%= f.select :team_id, @teams,  :include_blank => true %>
-  <%= f.label :name %>
+  <%= f.label :name, "Tag" %>
   <%= f.text_field :name %>
 
   <%= f.submit %>

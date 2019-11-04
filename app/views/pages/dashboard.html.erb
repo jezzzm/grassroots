@@ -1,20 +1,25 @@
 <h1>Dashboard for <%= @current_user.email %></h1>
-<% @teams.each do |t| %>
+<% @favs.each do |f| %>
   <article class="team-tile">
-    <h3>/ <%= link_to t.age_group, age_group_path(t.age_group) %> / <%= link_to t.division, division_path(t.age_group, t.division) %> / <%= link_to t.name, t %></h3>
+    <h3>
+      <%= f.name if f.name.present? %> /
+      <%= link_to f.team.age_group, age_group_path(f.team.age_group) %> /
+      <%= link_to f.team.division, division_path(f.team.age_group, f.team.division) %> /
+      <%= link_to f.team.name, f.team %>
+    </h3>
     <div class="dash-info">
       <div class="dash-next-game">
         <h4>Next Game
-          <% unless next_match(t).nil? %>
-            <% n = next_match(t) %>
+          <% unless next_match(f.team).nil? %>
+            <% n = next_match(f.team) %>
              - <a href="<%= match_path n %>" alt="Link to next game">in <%= days_from_today n.game_date %> days</a>
           <% end %>
          </h4>
-        <% unless next_match(t).nil? %>
+        <% unless next_match(f.team).nil? %>
 
           <p><%= long_date_time n.game_date %></p>
           <p><%= link_to n.ground.name, n.ground %></p>
-          <% opponent = other_team n, t.id %>
+          <% opponent = other_team n, f.team.id %>
           <p>Versus <%= link_to opponent.name, opponent %></p>
         <% else %>
           <p>No games scheduled.</p>
@@ -22,8 +27,8 @@
       </div>
       <div class="dash-latest-result">
         <h4>Latest Result</h4>
-        <% unless last_match(t).nil? %>
-          <% l = last_match(t) %>
+        <% unless last_match(f.team).nil? %>
+          <% l = last_match(f.team) %>
 
           <%= link_to(l.home_team.name, team_path(l.home_id), :class => team_classes(team_id: l.home_id, home: true)) %>
           <%= l.home_score %>
@@ -36,7 +41,7 @@
         <% end %>
       </div>
       <div class="dash-table">
-        <%= render "/partials/ladder", :age_group=> t.age_group, :division=> t.division, :specific_team=> t.id %>
+        <%= render "/partials/ladder", :age_group=> f.team.age_group, :division=> f.team.division, :specific_team=> f.team.id %>
       </div>
 
     </div>

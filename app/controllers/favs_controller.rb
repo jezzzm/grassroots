@@ -1,16 +1,13 @@
 class FavsController < ApplicationController
   def create
     @fav = Fav.create fav_params
-
+    redirect_to user_path @fav.user.id
   end
 
   def new
     @fav = Fav.new
     @user = @current_user
     @teams = Team.all.map {|t| [t.name, t.id]}
-    # @team_names = teams.map {|t| t.name}
-    # @team_ids = teams.map {|t| t.id}
-    # raise 'hell'
   end
 
   def edit
@@ -19,6 +16,9 @@ class FavsController < ApplicationController
   end
 
   def update
+    fav = Fav.find params[:fav_id]
+    fav.update fav_params
+    redirect_to user_path params[:id]
   end
 
   def destroy

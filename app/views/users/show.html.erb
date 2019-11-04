@@ -3,10 +3,11 @@
 <h2>Favourite Teams</h2>
 <% @favs.each do |f| %>
   <h4>
+    <%= f.name if f.name.present? %>
     / <%= link_to f.team.age_group, age_group_path(f.team.age_group) %> /
-    <%= link_to t.division, division_path(t.age_group, t.division) %> /
-    <%= link_to t.name, t %>
-    [<%= link_to "Edit", edit_fav_path(@user, @user.favs[i]) %>]
+    <%= link_to f.team.division, division_path(f.team.age_group, f.team.division) %> /
+    <%= link_to f.team.name, f.team %>
+    [<%= link_to "Edit Tag", edit_fav_path(f.user, f.id) %>]
   </h4>
 <% end %>
 <%= link_to "Add Team", new_fav_path(@user) %>
