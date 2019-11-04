@@ -1,4 +1,4 @@
-<table>
+<table class="table table-hover">
   <thead>
     <tr>
       <th>#</th>
@@ -25,7 +25,8 @@
 
         <tr class="<%= team_classes Team.find t[0] %>">
           <td><%= i + 1 %></td>
-          <td class="left-align"><%= link_to(t[1][:name], team_path(t[0])) %></td>
+          <td class="left-align"><%= link_to(t[1][:name], team_path(t[0]), :class=> team_classes(t[0])) %></td>
+
           <td><%= t[1][:mp] %></td>
           <td><%= t[1][:w] %></td>
           <td><%= t[1][:l] %></td>
@@ -36,11 +37,11 @@
           <td class="table-highlight"><%= t[1][:pts] %></td>
           <td class="form-container">
             <% form = Team.find(t[0]).form %>
-
+            <% form_key = {'W'=> 'Won', 'L'=> 'Lost', 'D'=> 'Drew'} %>
             <% form.each do |f| %>
               <% match = Match.find f[0] %>
               <a href="<%= match_path(f[0]) %>" class="form-icon form-<%= f[1].downcase %>">
-                <%= f[1] %>
+                <abbr title="<%= form_key[f[1]] %>"><%= f[1] %></abbr>
                 <span class="form-hover-detail">
 
                   <% if match.home_id == t[0] %>
@@ -51,7 +52,7 @@
                   <% if match.home_id == t[0] %>
                     </span>
                   <% end %>
-                   : 
+                   :
                   <% if match.away_id == t[0] %>
                     <span class="this-team">
                   <% end %>
