@@ -1,4 +1,4 @@
-<h1>/ <%= link_to @age_group, age_group_path(@age_group) %> / <%= @division %></h1>
+<h1>Teams / <%= link_to @age_group, age_group_path(@age_group) %> / <%= @division %></h1>
 <h3 class="mt-5">Ladder</h3>
 <%= render "/partials/ladder", :age_group=> @age_group, :division=> @division, :specific_team=> nil %>
 <h3 class="mt-5">Results</h3>

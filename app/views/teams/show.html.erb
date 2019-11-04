@@ -1,5 +1,6 @@
 <h1>
-  / <%= link_to(@team.age_group, age_group_path(@team.age_group)) %> /
+  Teams / 
+  <%= link_to(@team.age_group, age_group_path(@team.age_group)) %> /
   <%= link_to(@team.division, division_path(@team.age_group, @team.division)) %> /
   <%= @team.name %>
 </h1>

@@ -6,15 +6,13 @@
 require("@rails/ujs").start()
 require("turbolinks").start()
 
-// import jQuery from "jquery";
 
 
 import 'bootstrap/dist/js/bootstrap';
-// import './src/application.scss';
+require('jquery');
+require('packs/grassy_custom');
 
-import { $, jQuery } from 'jquery';
-window.$ = $;
-window.jQuery = jQuery;
+
 
 
 // Uncomment to copy all static images under ../images to the output folder and reference

@@ -15,7 +15,7 @@
     <tbody>
       <% max = 0 %>
       <% fixtures.each_with_index do |m, i| %>
-      <tr class="<%= "collapse multi-collapse" if i > 5 %>">
+      <tr class="<%= "collapse multi-collapse" if i > 5 %>" id="<%= "fixtures-last" if i == fixtures.size - 1 %>">
         <td class="left-align"><time><%= short_date m.game_date%></time></td>
         <td class="left-align"><time><%= time_only m.game_date %></time></td>
         <td class="left-align"><%= link_to(m.ground.name, ground_path(m.ground.id)) %></td>
@@ -34,7 +34,7 @@
   </table>
   <% if max > 5 %>
     <div>
-      <button class="btn btn-primary" type="button" data-toggle="collapse" data-target=".multi-collapse">See More</button>
+      <button class="btn btn-primary" id="fixtures-more"type="button" data-toggle="collapse" data-target=".multi-collapse">More Fixtures</button>
     </div>
   <% end %>
 <% else %>
