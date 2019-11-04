@@ -22,6 +22,9 @@ class FavsController < ApplicationController
   end
 
   def destroy
+    fav = Fav.find params[:fav_id]
+    fav.destroy
+    redirect_to user_path params[:id]
   end
 
   def index

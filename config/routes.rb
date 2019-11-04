@@ -2,6 +2,8 @@ Rails.application.routes.draw do
 
   # get 'users/:id/favs/create' => 'favs#create', :as => 'create_fav'
   get 'users/:id/favs/new' => 'favs#new', :as=> 'new_fav'
+  get 'users/:id/favs/:fav_id' => 'favs#show', :as => 'fav'
+  delete 'users/:id/favs/:fav_id' => 'favs#destroy', :as => 'delete_fav'
   get 'users/:id/favs/:fav_id/edit' => 'favs#edit', :as => 'edit_fav'
   get 'users/:id/favs/index' => 'favs#index', :as => 'favs'
   post 'users/:id/favs/index' => 'favs#create'

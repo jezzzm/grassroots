@@ -25,8 +25,12 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = @current_user
-    @teams = @user.teams
+    if @current_user.present?
+      @user = @current_user
+      @favs = @user.favs
+    else
+      redirect_to login_path
+    end
   end
 
   def destroy

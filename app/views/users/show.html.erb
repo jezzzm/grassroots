@@ -1,8 +1,13 @@
 <h1><%= @user.name %></h1>
 
 <h2>Favourite Teams</h2>
-<% @teams.each_with_index do |t, i| %>
-  <h4>/ <%= link_to t.age_group, age_group_path(t.age_group) %> / <%= link_to t.division, division_path(t.age_group, t.division) %> / <%= link_to t.name, t %> [<%= link_to "Edit", edit_fav_path(@user, @user.favs[i]) %>]</h4>
+<% @favs.each do |f| %>
+  <h4>
+    / <%= link_to f.team.age_group, age_group_path(f.team.age_group) %> /
+    <%= link_to t.division, division_path(t.age_group, t.division) %> /
+    <%= link_to t.name, t %>
+    [<%= link_to "Edit", edit_fav_path(@user, @user.favs[i]) %>]
+  </h4>
 <% end %>
 <%= link_to "Add Team", new_fav_path(@user) %>
 

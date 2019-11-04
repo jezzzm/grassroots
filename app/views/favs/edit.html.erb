@@ -3,3 +3,5 @@
 <p>User: <%= @fav.user.name %></p>
 <p>Team: <%= @fav.team.name %></p>
 <p>Name: <%= @fav.name %></p>
+
+<%= button_to "Delete", @fav, :method=> 'delete', :data=> {:confirm=> 'Are you sure?'} %>
