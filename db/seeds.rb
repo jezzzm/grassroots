@@ -68,7 +68,7 @@ def generate_matchups(team_ids)
 end
 
 def generate_random_data(age_group, division, team_count=10, start_date="2019-03-30")
-  identifiers = %w(Red Blue Green Yellow Wombats Possums Kangas Slugs Kittens Cats Cats Pink Lilac)
+  identifiers = %w(Red Blue Green Yellow Wombats Wombats Possums Kangas Slugs Kittens Cats Cats Cats Pink Lilac)
   these_teams = [] #array containing ids
   team_count.times do |i|
     used_clubs = Team.where(:division=> division, :age_group => age_group).map {|t| t.club}

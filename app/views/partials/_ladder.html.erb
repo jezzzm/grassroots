@@ -23,7 +23,7 @@
     <% ladder.each_with_index do |t, i| %>
       <% if specific_team.blank? || (i.between?(this_team - 1, this_team + 1) && i.between?(0, ladder.size - 1)) %>
 
-        <tr class="<%= team_classes(team_id: t[0], row_index: i, total_rows: ladder.size) %>">
+        <tr class="<%= team_classes Team.find t[0] %>">
           <td><%= i + 1 %></td>
           <td class="left-align"><%= link_to(t[1][:name], team_path(t[0])) %></td>
           <td><%= t[1][:mp] %></td>
@@ -42,10 +42,24 @@
               <a href="<%= match_path(f[0]) %>" class="form-icon form-<%= f[1].downcase %>">
                 <%= f[1] %>
                 <span class="form-hover-detail">
+
+                  <% if match.home_id == t[0] %>
+                    <span class="this-team">
+                  <% end %>
                   <%= match.home_team.club.short_sign %>
-                  <%= match.home_score %> :
+                  <%= match.home_score %>
+                  <% if match.home_id == t[0] %>
+                    </span>
+                  <% end %>
+                   : 
+                  <% if match.away_id == t[0] %>
+                    <span class="this-team">
+                  <% end %>
                   <%= match.away_score %>
                   <%= match.away_team.club.short_sign %>
+                  <% if match.away_id == t[0] %>
+                    </span>
+                  <% end %>
                 </span>
               </a>
 

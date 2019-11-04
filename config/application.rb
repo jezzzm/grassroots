@@ -31,5 +31,8 @@ module Grassroots
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    config.time_zone = 'Sydney'
+    config.active_record.default_timezone = :local
   end
 end

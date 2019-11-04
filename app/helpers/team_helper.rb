@@ -3,15 +3,13 @@ module TeamHelper
     teams = Team.where(:age_group => age_group, :division => division)
   end
 
-  def team_classes(team_id:, home: false, row_index: nil, total_rows: nil)
+  def team_classes(team_id, home=false)
     classes = ""
-    classes += "page-team " if params[:id].present? && params[:id] == team_id
-    # classes += "fav-team " if @current_user.present? && @current_user.teams.include?(team_id)
-    # classes += "home-team " if home
-    # classes += "compact-last " if row_index.present? && row_index == total_rows - 1
-    # classes += "compact-first " if row_index.present? && row_index.zero?
+    classes << "page-team " if params[:id].present? && params[:id].to_i == team_id
+    classes << "fav-team " if @current_user.present? && @current_user.teams.include?(team_id)
+    classes << "home-team " if home
     # raise 'hell'
-    classes
+    return classes
   end
 
   def next_match(team)

@@ -1,0 +1,20 @@
+<h1><%= @user.name %></h1>
+
+<h2>Favourite Teams</h2>
+<% @teams.each_with_index do |t, i| %>
+  <h4>/ <%= link_to t.age_group, age_group_path(t.age_group) %> / <%= link_to t.division, division_path(t.age_group, t.division) %> / <%= link_to t.name, t %> [<%= link_to "Edit", edit_fav_path(@user, @user.favs[i]) %>]</h4>
+<% end %>
+<%= link_to "Add Team", new_fav_path(@user) %>
+
+
+<h2>Personal Details</h2>
+
+<p>Name: <%= @user.name %></p>
+<p>Email: <%= @user.email %></p>
+<% if @user.admin %>
+  <p>Administrator: <%= @user.admin %></p>
+<% end %>
+<p>Account Created: <%= long_date_time @user.created_at %></p>
+<p>Last Updated: <%= long_date_time @user.updated_at %></p>
+<%= link_to "Edit Details", edit_user_path(@user) %>
+<%= link_to "Delete Account" %>

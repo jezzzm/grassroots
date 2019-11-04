@@ -79,24 +79,28 @@ module MatchesHelper
   end
 
   #time and date formatting
-  def long_date_time match
-    match.game_date.strftime('%l:%M%P, %A %B %e, %Y')
+  def long_date_time time
+    time.strftime('%l:%M%P, %A %B %e, %Y')
   end
 
-  def short_date_time match
-      match.game_date.strftime('%l:%M%P %a, %b %e')
+  def short_date_time time
+      time.strftime('%l:%M%P %a, %b %e')
   end
 
-  def long_date match
-    match.game_date.strftime('%A, %B %e, %Y')
+  def long_date time
+    time.strftime('%A, %B %e, %Y')
   end
 
-  def short_date match
-    match.game_date.strftime('%a, %b %e')
+  def short_date time
+    time.strftime('%a, %b %e')
   end
 
-  def time_only match
-    match.game_date.strftime('%l:%M%P')
+  def time_only time
+    time.strftime('%l:%M%P')
+  end
+
+  def days_from_today(future_time)
+    ((future_time - Time.now)/1.day).floor
   end
 
 end

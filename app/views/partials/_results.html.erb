@@ -1,5 +1,3 @@
-<h2>Results</h2> <!-- results -->
-
 <table>
   <thead>
     <tr>
@@ -7,6 +5,7 @@
       <th class="left-align">Time</th>
       <th class="left-align">Ground</th>
       <th>Comp</th>
+      <th>Round</th>
       <th class="right-align">Home Team</th>
       <th></th>
       <th></th>
@@ -18,15 +17,16 @@
   <tbody>
     <% results.each do |m| %>
     <tr>
-      <td class="left-align"><%= short_date m %></td>
-      <td class="left-align"><%= time_only m %></td>
+      <td class="left-align"><time><%= short_date m.game_date %></time></td>
+      <td class="left-align"><time><%= time_only m.game_date %></time></td>
       <td class="left-align"><%= link_to(m.ground.name, ground_path(m.ground.id)) %></td>
       <td><%= link_to("#{m.age_group}/#{m.division}", division_path(m.age_group, m.division)) %></td>
-      <td class="right-align"><%= link_to(m.home_team.name, team_path(m.home_id))  %></td>
+      <td><%= m.round %></td>
+      <td class="right-align"><%= link_to(m.home_team.name, team_path(m.home_id), :class => team_classes(m.home_id)) %></td>
       <td><%= m.home_score %></td>
       <td>:</td>
       <td><%= m.away_score %></td>
-      <td class="left-align"><%= link_to(m.away_team.name, team_path(m.away_id)) %></td>
+      <td class="left-align"><%= link_to(m.away_team.name, team_path(m.away_id), :class => team_classes(m.away_id)) %></td>
       <td class="right-align"><%= link_to("View →", match_path(m.id)) %></td>
     </tr>
     <% end %>

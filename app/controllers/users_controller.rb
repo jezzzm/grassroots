@@ -18,6 +18,20 @@ class UsersController < ApplicationController
     end
   end
 
+  def edit
+  end
+
+  def update
+  end
+
+  def show
+    @user = @current_user
+    @teams = @user.teams
+  end
+
+  def destroy
+  end
+
   private
   def user_params
     params.require(:user).permit(:email, :password, :password_confirmation)

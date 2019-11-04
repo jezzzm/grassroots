@@ -1,7 +1,7 @@
-<%= render "/partials/current_path_links", :age_group=> @age_group, :division=> @division, :h=>2, :suffix=> 'Dashboard' %>
-
+<h1>/ <%= link_to @age_group, age_group_path(@age_group) %> / <%= @division %></h1>
+<h3>Ladder</h3>
 <%= render "/partials/ladder", :age_group=> @age_group, :division=> @division, :specific_team=> nil %>
-
+<h3>Results</h3>
 <%= render "/partials/results", :results=> @results %>
-
+<h3>Fixtures</h3>
 <%= render "/partials/fixtures", :fixtures=> @fixtures %>
