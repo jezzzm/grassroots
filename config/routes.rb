@@ -1,6 +1,18 @@
 Rails.application.routes.draw do
+  root :to => 'pages#index'
+  resources :teams
+  resources :users
+  resources :clubs
+  resources :grounds
+  resources :matches
+  get '/dashboard' => 'pages#dashboard', :as=> 'dashboard'
+  get '/navigator' => 'pages#navigator', :as => 'navigator'
+  #login
+  get '/login' => 'session#new'
+  post '/login' => 'session#create'
+  delete '/login' => 'session#destroy'
 
-  # get 'users/:id/favs/create' => 'favs#create', :as => 'create_fav'
+  #custom paths for favourites - they should appear under under user
   get 'users/:id/favs/find' => 'favs#find', :as=> 'find_fav'
   post 'users/:id/favs/new' => 'favs#new', :as=> 'new_fav'
   get 'users/:id/favs/:fav_id' => 'favs#show', :as => 'fav'
@@ -9,32 +21,8 @@ Rails.application.routes.draw do
   get 'users/:id/favs/index' => 'favs#index', :as => 'favs'
   post 'users/:id/favs/index' => 'favs#create'
   patch 'users/:id/favs/:fav_id' => 'favs#update', :as => 'update_fav'
-  get 'favs/destroy'
 
-    get 'sessions/new'
-  get 'sessions/create'
-  get 'sessions/destroy'
-  root :to => 'pages#index'
-
-  resources :teams, :only => [:show, :new, :create]
-
-  resources :users
-
-  resources :clubs, :only => [:index, :show, :new, :craete]
-
-  resources :grounds, :only => [:show, :index, :new, :create]
-
-  resources :matches
-
-
-  get '/dashboard' => 'pages#dashboard' , :as=> 'dashboard'#user-specific dash
-
-
-  #login is not crud
-  get '/login' => 'session#new'
-  post '/login' => 'session#create'
-  delete '/login' => 'session#destroy'
-
+  #paths for age groups and divisions
   get '/:age_group/:division/:id', :to => redirect('/teams/:id')
   get '/:age_group/:division' => 'pages#division', :as=> 'division'
   get '/:age_group' => 'pages#age_group', :as=> 'age_group'

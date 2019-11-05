@@ -1,5 +1,8 @@
 <div class="row">
-  <h1><%= @user.name %></h1>
+  <div class="col">
+    <h1><%= @user.name %></h1>
+  </div>
+
 </div>
 
 <div class="row">
@@ -17,12 +20,12 @@
           <ul class="list-group list-group-flush">
             <% @favs.each do |f| %>
                 <li class="list-group-item d-flex justify-content-between align-items-center">
-                  <h5>
+                  <span>
                     <%= f.name if f.name.present? %>
                     / <%= link_to f.team.age_group, age_group_path(f.team.age_group) %> /
                     <%= link_to f.team.division, division_path(f.team.age_group, f.team.division) %> /
                     <%= link_to f.team.name, f.team %>
-                  </h5>
+                  </span>
 
                     <%= link_to "Edit", edit_fav_path(f.user, f.id), :class=> ' badge badge-pill badge-primary' %>
 
@@ -31,7 +34,10 @@
             <% end %>
             </ul>
         </div>
-        <%= link_to "New Favourite Team", find_fav_path(@user), :class=> 'btn btn-large btn-primary' %>
+        <div class="col text-center my-3">
+          <%= link_to "New Favourite Team", find_fav_path(@user), :class=> 'btn btn-primary' %>
+        </div>
+
       </div>
       <div class="tab-pane fade" id="user-details" role="tabpanel">
         <div class="card">
@@ -39,14 +45,20 @@
               <li class="list-group-item d-flex justify-content-between align-items-center">Name: <%= @user.name %></li>
               <li class="list-group-item d-flex justify-content-between align-items-center">Email: <%= @user.email %></li>
               <% if @user.admin %>
-                <li class="list-group-item d-flex justify-content-between align-items-center">Administrator: <%= @user.admin %></li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">Administrator: Yes</li>
               <% end %>
               <li class="list-group-item d-flex justify-content-between align-items-center">Account Created: <%= long_date_time @user.created_at %></li>
               <li class="list-group-item d-flex justify-content-between align-items-center">Last Updated: <%= long_date_time @user.updated_at %></li>
-              <li class="list-group-item d-flex justify-content-between align-items-center"></li>
-              <li class="list-group-item d-flex justify-content-between align-items-center"><%= link_to "Delete Account" %></li>
             </ul>
         </div>
+        <div class="col text-center my-3">
+          <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete-modal">
+            Delete
+          </button>
+          <%= link_to "Edit Details", edit_user_path(@user), :class => 'btn btn-primary' %>
+        </div>
+        <%= render "/partials/delete_modal", :target => @user, :content => "#{@user.name} (#{@user.email})"  %>
+
       </div>
     </div>
 

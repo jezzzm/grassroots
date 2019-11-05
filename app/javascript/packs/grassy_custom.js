@@ -11,4 +11,3 @@ $('#fixtures-last').on('hidden.bs.collapse', function () {
 $('#fixtures-last').on('shown.bs.collapse', function () {
   $('#fixtures-more').text('Fewer Fixtures');
 });
-console.log('custom js has run')

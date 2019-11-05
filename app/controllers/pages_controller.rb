@@ -1,9 +1,11 @@
 class PagesController < ApplicationController
+  before_action :check_for_login, :only => [:dashboard]
+
   def index
     @results = Match.get_matches(dates:'results')
     @fixtures = Match.get_matches(dates: 'fixtures')
     if @current_user.present?
-      #show custom dashboard
+      redirect_to dashboard_path
     else
       render :latest
     end
@@ -15,12 +17,6 @@ class PagesController < ApplicationController
     @division = params[:division]
     @fixtures = Match.get_matches(age_group: @age_group, division: @division, dates: 'fixtures')
     @results = Match.get_matches(age_group: @age_group, division: @division, dates: 'results')
-
-    if @current_user.present?
-      #show custom dashboard
-    else
-      render :division
-    end
   end
 
   def age_group
@@ -30,13 +26,11 @@ class PagesController < ApplicationController
   end
 
   def dashboard
-    if @current_user.present?
       @favs = @current_user.favs
-    else
-      redirect_to(login_path)
-    end
+  end
 
-    # raise "hell"
+  def navigator
+    
   end
 
 end

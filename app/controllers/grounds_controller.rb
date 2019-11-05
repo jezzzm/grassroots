@@ -1,13 +1,11 @@
 class GroundsController < ApplicationController
+  before_action :check_for_admin, :only => [:new, :create, :edit, :update, :destroy]
   def show
     @ground = Ground.find params[:id]
-    # raise 'hell'Geo
-    # @location = reverse_geocoded_by :latitude=> @ground.latitude, :longitude=> @ground.longitude
   end
 
   def index
     @grounds = Ground.all
-
   end
 
   def new
@@ -21,5 +19,18 @@ class GroundsController < ApplicationController
     else
       render :new
     end
+  end
+
+  def edit
+  end
+
+  def update
+
+  end
+
+  def destroy
+    ground = Ground.find params[:id]
+    ground.destroy
+    redirect_to grounds_path
   end
 end

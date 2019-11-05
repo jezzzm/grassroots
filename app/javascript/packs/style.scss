@@ -25,11 +25,6 @@ td, th {
   border-radius: 100%;
   color: #fff;
   text-align: center;
-  // font-family: monospace;
-  // font-size: 18px;
-}
-.form-icon strong {
-  // color: #222;
 }
 .form-icon abbr, a.form-icon {
   text-decoration: none;
@@ -88,7 +83,6 @@ a.fav-team {
   background: #dc3545;
 }
 .form-d {
-  // background: #ffc107;
   background: #343a40;
 }
 
@@ -150,4 +144,9 @@ span.form-hover-detail .result-score {
 }
 .nobreak {
   white-space: nowrap;
+}
+.flex-right {
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
 }
