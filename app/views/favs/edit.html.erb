@@ -1,9 +1,9 @@
-<div class="row">
-  <div class="col">
-    <h1>Update Favourite Team</h1>
+<div class="row mb-5">
+  <div class="col-md-10">
+    <h1 class="display-3">Modify Tracked Team</h1>
   </div>
 
-  <div class="col flex-right">
+  <div class="col-md-2 flex-right">
     <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete-modal">
       Delete
     </button>
@@ -17,7 +17,7 @@
     <div class="row form-group">
       <div class="col">
         <%= f.label :team_id %>
-        <%= f.text_field :team_id, :value=> @fav.team.name, :disabled => true, :class=> 'form-control' %>
+        <%= f.text_field :team_id, :value=> "#{@fav.team.age_group}/#{@fav.team.division}/#{@fav.team.name}", :disabled => true, :class=> 'form-control' %>
       </div>
     </div>
 
@@ -28,7 +28,7 @@
       </div>
     </div>
 
-    <div class="row ">
+    <div class="row">
       <div class="col text-center">
         <%= link_to "Cancel", user_path(@user), :class=> 'btn btn-lg btn-light mx-2' %>
         <%= f.submit "Update", :class=> 'btn btn-lg btn-primary mx-2' %>
@@ -36,4 +36,6 @@
     </div>
 
 <% end %>
+
+
 <%= render "/partials/delete_modal", :content=> @fav.name, :target=> @fav %>

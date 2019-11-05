@@ -1,19 +1,19 @@
-<h1>Add Favourite Team</h1>
+<h1 class="display-3">Track New Team</h1>
 <%= form_for @fav do |f| %>
   <%= f.text_field :user_id, :value=> @user.id, :placeholder=> @user.name, :type=>'hidden' %>
-  <div class="form-group">
+  <div class="form-group mt-5">
     <%= f.label :team_id %>
     <%= f.select :team_id, @results,  :include_blank => true, :class=> 'form-control' %>
   </div>
 
   <div class="form-group">
     <%= f.label :name, "Tag" %>
-    <%= f.text_field :name, :class=> 'form-control' %>
+    <%= f.text_field :name, :class=> 'form-control', :placeholder => "Jimmy's Team" %>
   </div>
 
   <div class="row ">
     <div class="col text-center">
-      <%= f.submit 'Add Team', :class=> 'btn btn-success btn-lg' %>
+      <%= f.submit 'Track Team', :class=> 'btn btn-success btn-lg' %>
     </div>
   </div>
 <% end %>

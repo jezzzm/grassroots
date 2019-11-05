@@ -1,8 +1,15 @@
-<h1>Playing Fields</h1>
+<h1 class="display-3">Playing Fields</h1>
 
-<% @grounds.each do |g| %>
-  <h3><%= link_to g.name, g %></h3>
-  <p><%= g.short_sign %></p>
-  <p><%= g.latitude %></p>
-  <p><%= g.longitude %></p>
-<% end %>
+<div class="row mt-5">
+  <div class="col-md-3">
+    <% @grounds.each do |g| %>
+      <dl class="row">
+        <dt class="col-sm-3"><%= g.short_sign %></dt>
+        <dd class="col-sm-9"><%= link_to g.name, g %></dd>
+      </dl>
+    <% end %>
+  </div>
+  <div class="col-md-9">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d62602.70114264631!2d151.03709801348617!3d-33.77192937375966!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x7f030dbd78a2a4ed!2sChristie%20Park!5e0!3m2!1sen!2sau!4v1572959272006!5m2!1sen!2sau" width="800" height="600" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
+  </div>
+</div>

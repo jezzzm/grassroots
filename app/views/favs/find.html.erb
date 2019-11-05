@@ -1,8 +1,7 @@
-<h1>Find Favourite Team</h1>
+<h1 class="display-3">Find A Team</h1>
 
 <%= form_tag new_fav_path do %>
-  <div class="form-group">
-
+  <div class="form-group mt-5">
     <%= label_tag :club %>
     <%= select_tag :club,options_for_select(@clubs), :class=> 'form-control', :include_blank=> true  %>
   </div>
@@ -18,5 +17,5 @@
 
   <%= submit_tag "Find Team", :class=>'btn-lg btn-primary' %>
 
-  
+
 <% end %>

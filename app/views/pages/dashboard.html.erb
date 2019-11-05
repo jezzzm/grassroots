@@ -1,4 +1,4 @@
-<h1>Dashboard</h1>
+<h1 class="display-3">Dashboard</h1>
 
 
   <% @favs.each do |f| %>
@@ -12,11 +12,11 @@
         </h2>
       </div>
     </div>
-    <div class="row my-4">
+    <div class="row mb-5 mt-3">
       <section class="col">
-        <div class="card h-100">
-          <div class="card-body">
-            <h4 class="card-title">Next Game
+        <div class="card h-100 bg-light">
+          <div class="card-body text-center">
+            <h4 class="card-title text-left mb-4">Next Game
               <% unless next_match(f.team).nil? %>
                 <% n = next_match(f.team) %>
                  - <a href="<%= match_path n %>" alt="Link to next game">in <%= days_from_today n.game_date %> days</a>
@@ -43,9 +43,9 @@
       </section>
 
       <section class="col">
-        <div class="card h-100">
-          <div class="card-body">
-            <h4 class="card-title">Latest Result</h4>
+        <div class="card h-100 bg-light">
+          <div class="card-body text-center">
+            <h4 class="card-title text-left mb-4">Latest Result</h4>
             <h5 class="card-subtitle">
               <% unless last_match(f.team).nil? %>
                 <% l = last_match(f.team) %>
