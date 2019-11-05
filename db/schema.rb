@@ -66,10 +66,10 @@ ActiveRecord::Schema.define(version: 2019_11_03_231953) do
     t.integer "club_id"
   end
 
-  create_table "teams_users", id: false, force: :cascade do |t|
-    t.integer "team_id"
-    t.integer "user_id"
-  end
+  # create_table "teams_users", id: false, force: :cascade do |t|
+  #   t.integer "team_id"
+  #   t.integer "user_id"
+  # end
 
   create_table "users", force: :cascade do |t|
     t.text "email"

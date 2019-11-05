@@ -11,7 +11,6 @@ c8 = Club.create :short_sign=> 'ASH', :name=> 'All Saints Hunters Hill FC'
 c9 = Club.create :short_sign=> 'EPP', :name=> 'Epping FC'
 c10 = Club.create :short_sign=> 'LEA', :name=> 'Roselea FC'
 c11 = Club.create :short_sign=> 'WRE', :name=> 'West Ryde Eagles SC'
-c12 = Club.create :short_sign=> 'WRE', :name=> 'West Ryde Eagles SC'
 c13 = Club.create :short_sign=> 'RED', :name=> 'Redbacks FC'
 c14 = Club.create :short_sign=> 'HCC', :name=> 'Holy Cross College SC'
 c15 = Club.create :short_sign=> 'WPH', :name=> 'WPH Cherrybrook FC'
@@ -19,8 +18,8 @@ c16 = Club.create :short_sign=> 'RAV', :name=> 'Gladesville Ravens SC'
 c17 = Club.create :short_sign=> 'THL', :name=> 'Thornleigh FC'
 c18 = Club.create :short_sign=> 'NMH', :name=> 'Normanhurst FC'
 c19 = Club.create :short_sign=> 'EEW', :name=> 'Epping Eastwood FC'
-c20 = Club.create :short_sign=> 'PUT', :name=> 'Pennant Hills FC'
-c21 = Club.create :short_sign=> 'PEN', :name=> 'Epping Eastwood FC'
+c20 = Club.create :short_sign=> 'PUT', :name=> 'Putney United FC'
+c21 = Club.create :short_sign=> 'PEN', :name=> 'Pennant Hills FC'
 c22 = Club.create :short_sign=> 'STA', :name=> 'Eastwood St Andrews AFC'
 c23 = Club.create :short_sign=> 'NER', :name=> 'North Epping Rangers SC'
 c24 = Club.create :short_sign=> 'BEE', :name=> 'Beecroft FC'
@@ -112,6 +111,10 @@ generate_random_data('SL', '1', 12, "2019-07-27")
 generate_random_data('SL', '2', 12, "2019-07-27")
 generate_random_data('AA', '3', 10, "2019-09-28")
 generate_random_data('AA', '4', 10, "2019-09-28")
+generate_random_data('AA', '3', 10, "2019-09-28")
+generate_random_data('AA', '4', 10, "2019-09-28")
+generate_random_data('AA', '5', 10, "2019-09-28")
+generate_random_data('AA', '6', 10, "2019-09-28")
 
 puts "created #{Team.count} teams"
 puts "created #{Match.count} matches"

@@ -5,9 +5,19 @@ class FavsController < ApplicationController
   end
 
   def new
-    @fav = Fav.new
     @user = @current_user
-    @teams = Team.all.map {|t| [t.name, t.id]}
+    @fav = Fav.new
+    hits = Team.where(:age_group => params[:age_group], :division=> params[:division])
+    @results = hits.map {|t| [t.name, t.id]}
+
+    # @clubs = Club.all.pluck(:name).sort
+  end
+
+  def find
+    @all = Team.all
+    @age_groups = @all.pluck(:age_group).uniq.sort
+    @divisions = @all.pluck(:division).uniq.sort ## only for selected age group
+    @clubs = @all.map{|t| t.club.name}.uniq.sort ## only for selected age group and division
   end
 
   def edit

@@ -1,7 +1,7 @@
 class Team < ActiveRecord::Base
   belongs_to :club, :optional => true
 
-  has_many :favs
+  has_many :favs, :dependent => :delete_all
   has_many :users, :through => :favs
 
   # method to replace "has_many :matches"

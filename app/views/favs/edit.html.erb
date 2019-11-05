@@ -1,11 +1,32 @@
-<h1>Edit Team Tag</h1>
+<h1>Update Favourite Team</h1>
 
 <%= form_for @fav do |f| %>
-  <%= f.label :team_id %>
-  <%= f.text_field :team_id, :value=> @fav.team.name, :disabled => true %>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
+  <% cache f do %>
 
-  <%= f.submit %>
+    <div class="row form-group">
+      <%= f.label :team_id %>
+      <%= f.text_field :team_id, :value=> @fav.team.name, :disabled => true, :class=> 'form-control' %>
+    </div>
+    <div class="row form-group">
+      <%= f.label :name %>
+      <%= f.text_field :name, :class=> 'form-control' %>
+    </div>
+
+    <div class="row ">
+      <div class="col text-center">
+        <%= link_to "Cancel", user_path(@user), :class=> 'btn btn-lg btn-light' %>
+        <button type="button" class="btn btn-lg btn-danger" data-toggle="modal" data-target="#delete-modal">
+          Delete
+        </button>
+        <%= f.submit 'Update', :class=> 'btn btn-lg btn-primary' %>
+
+      </div>
+
+    </div>
+    <%= render("/partials/delete_modal",
+      :title=> "Confirm Deletion",
+      :content=> "Are you sure you want to delete '#{@fav.name}'?",
+      :target=> @fav
+    ) %>
+  <% end %>
 <% end %>
-<%= button_to "Delete", @fav, :method=> 'delete', :data=> {:confirm=> 'Are you sure?'} %>

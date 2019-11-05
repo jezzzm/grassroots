@@ -1,0 +1,22 @@
+<h1>Find Favourite Team</h1>
+
+<%= form_tag new_fav_path do %>
+  <div class="form-group">
+
+    <%= label_tag :club %>
+    <%= select_tag :club,options_for_select(@clubs), :class=> 'form-control', :include_blank=> true  %>
+  </div>
+  <div class="form-group">
+    <%= label_tag :age_group %>
+    <%= select_tag :age_group, options_for_select(@age_groups), :class=> 'form-control', :include_blank => true  %>
+  </div>
+  <div class="form-group">
+    <%= label_tag :division %>
+    <%= select_tag :division, options_for_select(@divisions), :class=> 'form-control', :include_blank => true  %>
+  </div>
+
+
+  <%= submit_tag "Find Team", :class=>'btn-lg btn-primary' %>
+
+  
+<% end %>

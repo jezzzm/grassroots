@@ -1,26 +1,54 @@
-<h1><%= @user.name %></h1>
+<div class="row">
+  <h1><%= @user.name %></h1>
+</div>
 
-<h2>Favourite Teams</h2>
-<% @favs.each do |f| %>
-  <h4>
-    <%= f.name if f.name.present? %>
-    / <%= link_to f.team.age_group, age_group_path(f.team.age_group) %> /
-    <%= link_to f.team.division, division_path(f.team.age_group, f.team.division) %> /
-    <%= link_to f.team.name, f.team %>
-    [<%= link_to "Edit Tag", edit_fav_path(f.user, f.id) %>]
-  </h4>
-<% end %>
-<%= link_to "Add Team", new_fav_path(@user) %>
+<div class="row">
+  <div class="col-3">
+    <div class="list-group" id="user-tab" role="tablist">
+      <a href="#user-teams" class="list-group-item list-group-item-action active" data-toggle="list" id="user-teams-list" role="tab">My Teams</a>
+      <a href="#user-details" class="list-group-item list-group-item-action" data-toggle="list" id="user-details-list" role="tab">My Details</a>
+    </div>
+  </div>
 
+  <div class="col-9">
+    <div class="tab-content" id="nav-tabContent">
+      <div class="tab-pane fade show active" id="user-teams" role="tabpanel">
+        <div class="card">
+          <ul class="list-group list-group-flush">
+            <% @favs.each do |f| %>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  <h5>
+                    <%= f.name if f.name.present? %>
+                    / <%= link_to f.team.age_group, age_group_path(f.team.age_group) %> /
+                    <%= link_to f.team.division, division_path(f.team.age_group, f.team.division) %> /
+                    <%= link_to f.team.name, f.team %>
+                  </h5>
 
-<h2>Personal Details</h2>
+                    <%= link_to "Edit", edit_fav_path(f.user, f.id), :class=> ' badge badge-pill badge-primary' %>
 
-<p>Name: <%= @user.name %></p>
-<p>Email: <%= @user.email %></p>
-<% if @user.admin %>
-  <p>Administrator: <%= @user.admin %></p>
-<% end %>
-<p>Account Created: <%= long_date_time @user.created_at %></p>
-<p>Last Updated: <%= long_date_time @user.updated_at %></p>
-<%= link_to "Edit Details", edit_user_path(@user) %>
-<%= link_to "Delete Account" %>
+                </li>
+
+            <% end %>
+            </ul>
+        </div>
+        <%= link_to "New Favourite Team", find_fav_path(@user), :class=> 'btn btn-large btn-primary' %>
+      </div>
+      <div class="tab-pane fade" id="user-details" role="tabpanel">
+        <div class="card">
+          <ul class="list-group list-group-flush">
+              <li class="list-group-item d-flex justify-content-between align-items-center">Name: <%= @user.name %></li>
+              <li class="list-group-item d-flex justify-content-between align-items-center">Email: <%= @user.email %></li>
+              <% if @user.admin %>
+                <li class="list-group-item d-flex justify-content-between align-items-center">Administrator: <%= @user.admin %></li>
+              <% end %>
+              <li class="list-group-item d-flex justify-content-between align-items-center">Account Created: <%= long_date_time @user.created_at %></li>
+              <li class="list-group-item d-flex justify-content-between align-items-center">Last Updated: <%= long_date_time @user.updated_at %></li>
+              <li class="list-group-item d-flex justify-content-between align-items-center"></li>
+              <li class="list-group-item d-flex justify-content-between align-items-center"><%= link_to "Delete Account" %></li>
+            </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

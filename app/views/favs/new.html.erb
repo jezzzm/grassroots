@@ -1,11 +1,16 @@
 <h1>Add Favourite Team</h1>
-
 <%= form_for @fav do |f| %>
   <%= f.text_field :user_id, :value=> @user.id, :placeholder=> @user.name, :type=>'hidden' %>
-  <%= f.label :team_id %>
-  <%= f.select :team_id, @teams,  :include_blank => true %>
-  <%= f.label :name, "Tag" %>
-  <%= f.text_field :name %>
+  <div class="form-group">
+    <%= f.label :team_id %>
+    <%= f.select :team_id, @results,  :include_blank => true, :class=> 'form-control' %>
+  </div>
 
-  <%= f.submit %>
+  <div class="form-group">
+    <%= f.label :name, "Tag" %>
+    <%= f.text_field :name, :class=> 'form-control' %>
+  </div>
+
+
+  <%= f.submit 'Add Team', :class=> 'btn btn-success btn-lg' %>
 <% end %>
