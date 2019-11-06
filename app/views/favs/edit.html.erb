@@ -4,9 +4,7 @@
   </div>
 
   <div class="col-md-2 flex-right">
-    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete-modal">
-      Delete
-    </button>
+    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete-modal">Remove</button>
   </div>
 
 </div>
@@ -17,7 +15,7 @@
     <div class="row form-group">
       <div class="col">
         <%= f.label :team_id %>
-        <%= f.text_field :team_id, :value=> "#{@fav.team.age_group}/#{@fav.team.division}/#{@fav.team.name}", :disabled => true, :class=> 'form-control' %>
+        <%= f.text_field :team_id, :value=> "#{@fav.team.age_group} / #{@fav.team.division} / #{@fav.team.name}", :disabled => true, :class=> 'form-control' %>
       </div>
     </div>
 
@@ -38,4 +36,4 @@
 <% end %>
 
 
-<%= render "/partials/delete_modal", :content=> @fav.name, :target=> @fav %>
+<%= render "/partials/delete_modal", :content=> @fav.name, :target=> @fav, :word=> 'Remove' %>

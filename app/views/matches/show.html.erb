@@ -1,2 +1,52 @@
-<h1>Matches#show</h1>
-<p>Find me in app/views/matches/show.html.erb</p>
+<div class="row">
+  <h1 class="display-3">Match</h1>
+</div>
+<div class="row">
+  <h3>
+    <small class="text-muted">
+      Played <%= long_date_time @match.game_date %> at <%= link_to @match.ground.name, ground_path(@match.ground) %>
+    </small>
+  </h3>
+
+</div>
+<div class="row mt-5 text-center">
+  <h3 class="mx-auto">
+    <small class="text-muted">
+      <%= link_to @match.age_group, age_group_path(@match.age_group) %> /
+      <%= link_to @match.division, division_path(@match.age_group, @match.division) %>
+    </small>
+  </h3>
+</div>
+<div class="row">
+  <div class="col text-right">
+    <h1><%= link_to @match.home_team.name, team_path(@match.home_id) %></h1>
+  </div>
+  <div class="col-50 my-auto">
+    <h3><%= render "/partials/score", :home_score=> @match.home_score, :away_score=> @match.away_score %></h3>
+  </div>
+  <div class="col text-left">
+    <h1><%= link_to @match.away_team.name, team_path(@match.away_id) %></h1>
+  </div>
+</div>
+<div class="row">
+  <div class="col text-right">
+    <h3><small class="text-muted">Home Team</small></h3>
+  </div>
+  <div class="col-50">
+  </div>
+  <div class="col text-left">
+    <h3><small class="text-muted">Away Team</small></h3>
+  </div>
+</div>
+
+<div class="row mt-5">
+  <div class="col-md-6 offset-3">
+    <h3 class="mx-auto text-center">Match Comment</h3>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+  </div>
+</div>
+
+<div class="row text-center mt-5 ">
+  <%= link_to "Head-to-Head Data", matchup_path(@match.home_id, @match.away_id), :class=> 'btn btn-lg btn-primary mx-auto' %>
+</div>

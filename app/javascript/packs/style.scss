@@ -92,9 +92,9 @@ a.fav-team {
   font-weight: bold;
 }
 
-.osm {
+.gmap {
   width: 100%;
-  height: 40em;
+  height: 30em;
 }
 
 .compact tr {
@@ -141,6 +141,14 @@ h5.card-subtitle .result-score span {
 }
 span.form-hover-detail .result-score {
   margin: 0 0.2rem;
+}
+.col-50 .result-score,
+h3.mx-auto .result-score {
+  padding: 0 0.8rem;
+}
+.col-50 .result-score span,
+h3.mx-auto .result-score span {
+  padding: 0 0.2rem 0 0.3rem;
 }
 .nobreak {
   white-space: nowrap;

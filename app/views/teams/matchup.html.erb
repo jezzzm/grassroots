@@ -1,0 +1,98 @@
+<div class="row">
+  <div class="col">
+    <h1 class="display-3">Matchup</h1>
+  </div>
+
+</div>
+
+<div class="row mt-5 text-center">
+  <h3 class="mx-auto">
+    <small class="text-muted">
+      <%= link_to @a.age_group, age_group_path(@a.age_group) %> /
+      <%= link_to @a.division, division_path(@a.age_group, @a.division) %>
+    </small>
+  </h3>
+</div>
+<div class="row">
+  <div class="col text-right">
+    <h1><%= link_to @a.name, @a %></h1>
+  </div>
+  <div class="col-50 my-auto">
+    <h3><small class="text-muted">vs</small></h3>
+  </div>
+  <div class="col text-left">
+    <h1><%= link_to @b.name, @b %></h1>
+  </div>
+</div>
+
+<table class="table text-center mt-5 table-hover">
+  <tbody>
+    <tr>
+      <td colspan="3"><strong><%= @a_stats[:mp] %> Games Played</strong></td>
+    </tr>
+    <tr>
+      <td><p class="my-0"><strong>Won</strong></p><p class="my-0"><%= @a_stats[:w] %></p></td>
+      <td><p class="my-0"><strong>Drawn</strong></p><p class="my-0"><%= @a_stats[:d] %></p></td>
+      <td><p class="my-0"><strong>Won</strong></p><p class="my-0"><%= @b_stats[:w] %></p></td>
+    </tr>
+    <tr>
+      <td><%= @a_stats[:gf] %></td>
+      <td><strong>Goals</strong></td>
+      <td><%= @b_stats[:gf] %></td>
+    </tr>
+    <tr>
+      <td><%= @a_stats[:cs] %></td>
+      <td><strong>Clean Sheets</strong></td>
+      <td><%= @b_stats[:cs] %></td>
+    </tr>
+  </tbody>
+</table>
+<div class="row mt-5">
+  <h1 class="mx-auto">Last Meeting</h1>
+</div>
+
+<% if @last.present? && @last.home_score != nil%>
+  <div class="row my-3">
+    <div class="col">
+      <h4 class="text-right">
+          <%= link_to(@last.home_team.name, team_path(@last.home_id), :class => team_classes(team_id: @last.home_id, home: true)) %>
+      </h4>
+    </div>
+    <div class="col-50">
+      <h4><%= render "/partials/score", :home_score=> @last.home_score, :away_score=> @last.away_score %></h4>
+    </div>
+    <div class="col">
+      <h4 class="text-left">
+        <%= link_to(@last.away_team.name, team_path(@last.away_id), :class => team_classes(team_id: @last.away_id)) %>
+      </h4>
+    </div>
+  </div>
+  <div class="row">
+    <h4 class="mx-auto text-center">
+      <small class="text-muted text-center mx-auto">
+        Played <%= long_date_time @last.game_date %> at <%= link_to @last.ground.name, ground_path(@last.ground) %>. <%= link_to("View →", match_path(@last.id), :class=> "view-link") %>
+      </small>
+    </h4>
+  </div>
+<% else %>
+  <div class="row">
+    <h3>No matches played yet.</h3>
+  </div>
+
+<% end %>
+
+<div class="row mt-5">
+  <h1 class="mx-auto">Next Meeting</h1>
+</div>
+<div class="row my-3">
+
+  <% if @next.present? && @next.home_score == nil %>
+    <h4 class="mx-auto mt-4 text-center">
+      <small class="text-muted text-center mx-auto">
+        <%= long_date_time @next.game_date %>, at <%= link_to @next.ground.name, ground_path(@next.ground) %>. <%= link_to("View →", match_path(@next.id), :class=> "view-link") %>
+      </small>
+    </h4>
+  <% else %>
+    <h4 class="mx-auto"><small class="text-muted text-center">No matches scheduled.</small></h4>
+  <% end %>
+</div>

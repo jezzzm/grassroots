@@ -59,7 +59,7 @@
           </button>
           <%= link_to "Edit Details", edit_user_path(@user), :class => 'btn btn-primary' %>
         </div>
-        <%= render "/partials/delete_modal", :target => @user, :content => "#{@user.name} (#{@user.email})"  %>
+        <%= render "/partials/delete_modal", :target => @user, :word => 'Delete', :content => "#{@user.name} (#{@user.email})"  %>
 
       </div>
     </div>

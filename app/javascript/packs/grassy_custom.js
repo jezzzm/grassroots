@@ -1,8 +1,12 @@
 $(document).ready(function() {
-  function updateTeams(c, ag, d, nodeID) {
+  function updateTeams(nodeID) {
+    const c = "#club-dd"
+    const ag = "#age-group-dd"
+    const d = "#division-dd"
     const selectedClub = $(c).val();
     const selectedAgeGroup = $(ag).val();
     const selectedDivision = $(d).val();
+
 
     //update data visible in table
     rows = $(nodeID).children()
@@ -33,51 +37,53 @@ $(document).ready(function() {
             }
           }
         } else {
+          visibleDivisions.includes(parseInt(division)) ? null : visibleDivisions.push(parseInt(division))
           $(d).prop('disabled', true)
         }
       } else {
         $(ag).prop('disabled', true)
         rows[i].style.display = "none";
+        visibleAgeGroups.includes(ageGroup) ? null : visibleAgeGroups.push(ageGroup)
+        visibleDivisions.includes(parseInt(division)) ? null : visibleDivisions.push(parseInt(division))
       }
 
     }
 
+
+
     //update dropdowns
-    let visibleRows = $(nodeID).children('tr:visible'); //should only be options for one team
-    let visibleAgeGroups = [];
-    let visibleDivisions = [];
-    for (let i = 0; i < visibleRows.length; i++) {
-      const ageGroup = visibleRows[i].querySelector('.age-group').innerText;
-      const division = parseInt(visibleRows[i].querySelector('.division').innerText);
-      visibleAgeGroups.includes(ageGroup) ? null : visibleAgeGroups.push(ageGroup)
-      visibleDivisions.includes(division) ? null : visibleDivisions.push(division)
-    }
-
-    visibleAgeGroups.sort()
-    visibleDivisions.sort()
-
-    $(ag).empty()
-    // $(ag).append(`<option value=""></option>`)
-    for (let i = 0; i < visibleAgeGroups.length; i++) {
-      $(ag).append(`<option value="${visibleAgeGroups[i]}">${visibleAgeGroups[i]}</option>`)
-    }
-
-    $(d).empty()
-    // $(d).append(`<option value=""></option>`)
-    for (let i = 0; i < visibleDivisions.length; i++) {
-      $(d).append(`<option value="${visibleDivisions[i]}">${visibleDivisions[i]}</option>`)
-    }
+  //   visibleAgeGroups.sort()
+  //   visibleDivisions.sort()
+  //
+  //   $(ag).empty()
+  //   // $(ag).append(`<option value=""></option>`)
+  //   for (let i = 0; i < visibleAgeGroups.length; i++) {
+  //     $(ag).append(`<option value="${visibleAgeGroups[i]}">${visibleAgeGroups[i]}</option>`)
+  //     $(`${ag}:last-child`).val() == selectedAgeGroup ? $(`${ag}:last-child`).attr('selected', 'selected'): null;
+  //   }
+  //
+  //   $(d).empty()
+  //   // $(d).append(`<option value=""></option>`)
+  //   for (let i = 0; i < visibleDivisions.length; i++) {
+  //     $(d).append(`<option value="${visibleDivisions[i]}">${visibleDivisions[i]}</option>`)
+  //     $(`${d}:last-child`).val() == selectedDivision ? $(`${d}:last-child`).attr('selected', 'selected'): null;
+  //   }
   };
 
-  function resetFilters() {
-    //no rows display
+  function filterIt() {
 
-    //all clubs, age groups, divisions repopulated
-
-    //age group and division greyed out
   }
 
-  console.log('before');
+  function resetFilters() {
+    //toggle and reset
+    $('#club-dd option').first().attr('selected', 'selected')
+    $('#age-group-dd option').first().attr('selected', 'selected')
+    $('#division-dd option').first().attr('selected', 'selected')
+    updateTeams('#teams')
+    $('#club-dd option').first().removeAttr('selected')
+    $('#age-group-dd option').first().removeAttr('selected')
+    $('#division-dd option').first().removeAttr('selected')
+  }
 
   $('#results-last').on('hide.bs.collapse', function () {
     $('#results-more').text('More Results');
@@ -93,13 +99,9 @@ $(document).ready(function() {
     $('#fixtures-more').text('Fewer Fixtures');
   });
 
-  $('#club-dd').on('change', () => updateTeams('#club-dd', '#age-group-dd', '#division-dd', '#teams'))
-  $('#age-group-dd').on('change', () => updateTeams('#club-dd', '#age-group-dd', '#division-dd', '#teams'))
-  $('#division-dd').on('change', () => updateTeams('#club-dd', '#age-group-dd', '#division-dd', '#teams'))
-
-
-  console.log('after');
-
-
+  $('#club-dd').on('change', () => updateTeams('#teams'))
+  $('#age-group-dd').on('change', () => updateTeams('#teams'))
+  $('#division-dd').on('change', () => updateTeams('#teams'))
+  $('#reset-filters').on('click', () => resetFilters())
 
 });

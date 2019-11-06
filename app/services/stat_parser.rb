@@ -32,6 +32,9 @@ class StatParser < ApplicationService
     @away[:ga] += @match.home_score
     @away[:gd] = @away[:gf] - @away[:ga]
 
+    @home[:cs] += 1 if @match.away_score == 0
+    @away[:cs] += 1 if @match.home_score == 0
+
     [@home, @away]
   end
 end

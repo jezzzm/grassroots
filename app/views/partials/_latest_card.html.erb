@@ -1,0 +1,23 @@
+<div class="card h-100 bg-light">
+  <div class="card-body text-center">
+    <h4 class="card-title text-left mb-4">Latest Result</h4>
+    <h5 class="card-subtitle">
+        <div class="row">
+          <div class="col">
+            <%= link_to(home.name, team_path(home), :class => team_classes(team_id: home.id, home: true)) %>
+          </div>
+          <div class="col-50">
+            <%= render "/partials/score", :home_score=> match.home_score, :away_score=> match.away_score %>
+          </div>
+          <div class="col">
+            <%= link_to(away.name, team_path(away), :class => team_classes(team_id: away.id)) %>
+          </div>
+        </div>
+    </h5>
+
+      <p class="mt-3">Played on <%= short_date match.game_date %> at <%= link_to match.ground.name, match.ground %></p>
+      <%= link_to "Review", match_path(match), :class=> 'btn btn-primary' %>
+    <% else %>
+      <h5 class="card-subtitle">No games played this season.</h5>
+    <% end %>
+  </div>

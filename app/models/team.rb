@@ -2,6 +2,7 @@ class Team < ActiveRecord::Base
   belongs_to :club, :optional => true
   has_many :favs, :dependent => :delete_all
   has_many :users, :through => :favs
+  scope :ordered, -> {}
 
   #INSTANCE METHODS
   def matches   # method to replace "has_many :matches"

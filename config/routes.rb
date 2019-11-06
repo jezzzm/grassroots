@@ -22,6 +22,8 @@ Rails.application.routes.draw do
   post 'users/:id/favs/index' => 'favs#create'
   patch 'users/:id/favs/:fav_id' => 'favs#update', :as => 'update_fav'
 
+  #path for head-to-head comparison
+  get '/teams/:a/:b' => 'teams#matchup', :as => 'matchup'
   #paths for age groups and divisions
   get '/:age_group/:division/:id', :to => redirect('/teams/:id')
   get '/:age_group/:division' => 'pages#division', :as=> 'division'

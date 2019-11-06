@@ -1,8 +1,16 @@
 <h1 class="display-3">Playing Field<h1>
-<h1><%= link_to "GHFA Fields", grounds_path %> / <%= @ground.name %></h1>
+<h1 class="mt-5"><%= link_to "GHFA Fields", grounds_path %> / <%= @ground.name %></h1>
 
-<p><strong>Short Sign:</strong> <%= @ground.short_sign %></p>
-<p><strong>Latitude:</strong> <%= @ground.latitude %></p>
-<p><strong>Longitude:</strong> <%= @ground.longitude %></p>
-
-<iframe class="osm" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.openstreetmap.org/export/embed.html?bbox=<%= @ground.longitude %>%2C<%= @ground.latitude %>%2C<%= @ground.longitude %>%2C<%= @ground.latitude %>&amp;layer=mapnik" style="border: 1px solid black"></iframe><br/><small><a href="https://www.openstreetmap.org/#map=17/-33.86907/151.17408">View Larger Map</a></small>
+<div class="row mt-5">
+  <div class="col-md-2">
+    <p><%= link_to "Directions", "https://www.google.com/maps/dir/?api=1&destination=#{@ground.latitude},#{@ground.longitude}", :target => '_blank', :class=> 'btn btn-lg btn-success' %></p>
+    <p><strong>Short Sign:</strong> <%= @ground.short_sign %></p>
+    <p><strong>Latitude:</strong> <%= @ground.latitude %></p>
+    <p><strong>Longitude:</strong> <%= @ground.longitude %></p>
+    <p><strong>Council:</strong> <%= link_to "Council" %></p>
+  </div>
+  <div class="col-md-10">
+    <iframe class='gmap' frameborder="0"
+    src="https://www.google.com/maps/embed/v1/view?center=<%= @ground.latitude %>,<%= @ground.longitude %>&zoom=16&key=<%= Grassroots::Application.credentials.google_api_key %>" allowfullscreen></iframe>
+  </div>
+</div>
