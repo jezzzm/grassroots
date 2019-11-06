@@ -4,7 +4,7 @@ class PagesController < ApplicationController
   def index
     @results = Match.get_matches(dates:'results')
     @fixtures = Match.get_matches(dates: 'fixtures')
-    if @current_user.present?
+    if @current_user.present? && @current_user.teams.present?
       redirect_to dashboard_path
     else
       render :latest
@@ -30,7 +30,11 @@ class PagesController < ApplicationController
   end
 
   def navigator
-    
+    @teams = Team.all.order(:age_group, :division) #to get team data for display in main div
+    @team = @teams.first
+    @clubs = @teams.map{|t| t.club.name}.uniq.sort # to populate club dropdown
+    @age_groups = @teams.pluck(:age_group).uniq.sort #to populate age_grop dd
+    @divisions = @teams.pluck(:division).uniq.sort #to populdate division dd
   end
 
 end

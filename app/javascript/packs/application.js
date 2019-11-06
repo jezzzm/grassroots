@@ -10,7 +10,7 @@ require("turbolinks").start()
 
 import 'bootstrap/dist/js/bootstrap';
 require('jquery');
-require('packs/grassy_custom');
+
 
 
 

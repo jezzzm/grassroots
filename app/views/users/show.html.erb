@@ -10,7 +10,7 @@
 <div class="row mt-5">
   <div class="col-3">
     <div class="list-group" id="user-tab" role="tablist">
-      <a href="#user-teams" class="list-group-item list-group-item-action active" data-toggle="list" id="user-teams-list" role="tab">My Teams</a>
+      <a href="#user-teams" class="list-group-item list-group-item-action active" data-toggle="list" id="user-teams-list" role="tab">Tracked Teams</a>
       <a href="#user-details" class="list-group-item list-group-item-action" data-toggle="list" id="user-details-list" role="tab">My Details</a>
     </div>
   </div>
@@ -29,7 +29,7 @@
                     <%= link_to f.team.name, f.team %>
                   </span>
 
-                    <%= link_to "Edit", edit_fav_path(f.user, f.id), :class=> ' badge badge-pill badge-primary' %>
+                    <%= link_to "Update", edit_fav_path(f.user, f.id), :class=> ' badge badge-warning' %>
 
                 </li>
 
@@ -37,7 +37,7 @@
             </ul>
         </div>
         <div class="col text-center my-3">
-          <%= link_to "New Favourite Team", find_fav_path(@user), :class=> 'btn btn-primary' %>
+          <%= link_to "Track New Team", find_fav_path(@user), :class=> 'btn btn-primary' %>
         </div>
 
       </div>
