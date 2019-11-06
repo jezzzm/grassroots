@@ -5,7 +5,7 @@ class GroundsController < ApplicationController
   end
 
   def index
-    @grounds = Ground.all
+    @grounds = Ground.all.order(:name)
   end
 
   def new

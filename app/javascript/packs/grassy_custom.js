@@ -74,6 +74,13 @@ $(document).ready(function() {
 
   }
 
+  function searchGround() {
+    const value = $(this).val().toLowerCase();
+    $("#ground-list tbody tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  }
+
   function resetFilters() {
     //toggle and reset
     $('#club-dd option').first().attr('selected', 'selected')
@@ -102,6 +109,8 @@ $(document).ready(function() {
   $('#club-dd').on('change', () => updateTeams('#teams'))
   $('#age-group-dd').on('change', () => updateTeams('#teams'))
   $('#division-dd').on('change', () => updateTeams('#teams'))
-  $('#reset-filters').on('click', () => resetFilters())
+  $('#reset-filters').on('click', resetFilters)
+
+  $('#ground-search').on('keyup blur', searchGround)
 
 });

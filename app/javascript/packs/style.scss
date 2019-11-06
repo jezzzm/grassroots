@@ -88,6 +88,7 @@ a.fav-team {
 
 
 
+
 .table-highlight {
   font-weight: bold;
 }
@@ -157,4 +158,18 @@ h3.mx-auto .result-score span {
   display:flex;
   align-items:center;
   justify-content:flex-end;
+}
+table#ground-list td{
+  text-align: left;
+  vertical-align: middle;
+}
+table#ground-list td .btn {
+  text-align: right;
+}
+
+.tcol-20 {
+  width:20%;
+}
+.tcol-60 {
+  width: 60%;
 }

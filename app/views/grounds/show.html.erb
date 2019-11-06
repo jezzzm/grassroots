@@ -3,7 +3,7 @@
 
 <div class="row mt-5">
   <div class="col-md-2">
-    <p><%= link_to "Directions", "https://www.google.com/maps/dir/?api=1&destination=#{@ground.latitude},#{@ground.longitude}", :target => '_blank', :class=> 'btn btn-lg btn-success' %></p>
+    <p><%= navigate_to(@ground.latitude, @ground.longitude, 'btn btn-lg btn-success') %></p>
     <p><strong>Short Sign:</strong> <%= @ground.short_sign %></p>
     <p><strong>Latitude:</strong> <%= @ground.latitude %></p>
     <p><strong>Longitude:</strong> <%= @ground.longitude %></p>

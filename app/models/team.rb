@@ -2,7 +2,7 @@ class Team < ActiveRecord::Base
   belongs_to :club, :optional => true
   has_many :favs, :dependent => :delete_all
   has_many :users, :through => :favs
-  scope :ordered, -> {}
+  scope :club_name, ->(club) {where(:club => club).name == club_name }
 
   #INSTANCE METHODS
   def matches   # method to replace "has_many :matches"
@@ -28,6 +28,7 @@ class Team < ActiveRecord::Base
   def name #to simply get the team name + identifier (e.g. "blue"), if it exists as string
     "#{self.club.name}#{" " + self.identifier if self.identifier.present?}"
   end
+
 
   def ladder_position after_round=0
     matches = Match.get_matches(:age_group => self.age_group, :division => self.division, :round_limit => after_round, :dates => 'results')

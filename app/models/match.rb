@@ -3,6 +3,8 @@ class Match < ActiveRecord::Base
   belongs_to :away_team, class_name: "Team", foreign_key: "away_id", :optional=> true
   belongs_to :ground, :optional=> true
 
+  # scope :
+
   def self.get_matches age_group: false, division: false, dates: 'all', round_limit: 0, team:false, h2h:[]
     if dates == 'fixtures' #only unplayed games, soonest to farthest awau
       res = self.where(:home_score=> nil).order(:game_date)

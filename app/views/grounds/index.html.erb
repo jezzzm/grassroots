@@ -1,15 +1,35 @@
 <h1 class="display-3">Playing Fields</h1>
 
 <div class="row mt-5">
-  <div class="col-md-3">
-    <% @grounds.each do |g| %>
-      <dl class="row">
-        <dt class="col-sm-3"><%= g.short_sign %></dt>
-        <dd class="col-sm-9"><%= link_to g.name, g %></dd>
-      </dl>
-    <% end %>
+  <div class="col-md-4">
+    <form class="form-inline my-2 my-lg-0">
+
+        <input id="ground-search" class="form-control mr-sm-2 w-75" type="search" placeholder="Find a Playing Field" aria-label="Find a Playing Field">
+        <button class="btn btn-primary my-2 my-sm-0" type="submit">Search</button>
+
+
+    </form>
+    <table class="table mt-5 w-100" id="ground-list">
+      <thead>
+        <tr>
+          <th class="tcol-20">Code</th>
+          <th class="tcol-60">Name</th>
+          <th class="tcol-20"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @grounds.each do |g| %>
+          <tr scope="row">
+            <td><%= g.short_sign %></td>
+            <td><%= link_to g.name, g %> <%=  %></td>
+            <td><%= navigate_to(g.latitude, g.longitude, 'btn btn-sm btn-outline-success nobreak', 'Nav →') %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
   </div>
-  <div class="col-md-9">
+  <div class="col-md-8">
     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d62602.70114264631!2d151.03709801348617!3d-33.77192937375966!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x7f030dbd78a2a4ed!2sChristie%20Park!5e0!3m2!1sen!2sau!4v1572959272006!5m2!1sen!2sau" width="800" height="600" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
   </div>
 </div>
