@@ -10,7 +10,6 @@
     <p><strong>Council:</strong> <%= link_to "Council" %></p>
   </div>
   <div class="col-md-10">
-    <iframe class='gmap' frameborder="0"
-    src="https://www.google.com/maps/embed/v1/view?center=<%= @ground.latitude %>,<%= @ground.longitude %>&zoom=16&key=<%= Grassroots::Application.credentials.google_api_key %>" allowfullscreen></iframe>
+    <%= render "/partials/render_gmap", :lat => @ground.latitude, :long => @ground.longitude %>
   </div>
 </div>

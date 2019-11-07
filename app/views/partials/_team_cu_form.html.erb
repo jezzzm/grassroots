@@ -1,0 +1,56 @@
+<%= form_for @match do |f| %>
+  <div class="form-group">
+    <%= f.label :round %>
+    <%= f.number_field :round, :class => 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :game_date %>
+    <%= f.text_field :game_date, :type => 'date', :class => 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :ground_id %>
+    <%= f.select :ground_id, @grounds, {:include_blank => true}, :class => 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :age_group %>
+    <%= f.select :age_group, @age_groups, {:include_blank => true}, :class => 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :division %>
+    <%= f.select :division, @divisions, {:include_blank => true}, :class => 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :home_id %>
+    <%= f.select :home_id, @teams, {:include_blank => true}, :class => 'form-control'  %>
+  </div>
+
+  <% if update %>
+    <div class="form-group">
+      <%= f.label :home_score %>
+      <%= f.number_field :home_score, :class => 'form-control' %>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :away_id %>
+    <%= f.select :away_id, @teams, {:include_blank => true}, :class => 'form-control' %>
+  </div>
+
+  <% if update %>
+    <div class="form-group">
+      <%= f.label :away_score %>
+      <%= f.number_field :away_score, :class => 'form-control' %>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :comments %>
+    <%= f.text_field :comments, :class => 'form-control' %>
+  </div>
+
+  <div class="text-center mx-auto my-5">
+    <%= f.submit text, :class => 'btn btn-lg btn-success' %>
+  </div>
+
+<% end %>

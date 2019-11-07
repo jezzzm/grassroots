@@ -1,0 +1,52 @@
+
+<div class="row">
+  <div class="col">
+    <h3>
+      <small class="text-muted">
+        Kick-off at <%= long_date_time @match.game_date %>, at <%= link_to @match.ground.name, ground_path(@match.ground) %>
+      </small>
+    </h3>
+  </div>
+</div>
+<div class="row mt-5 text-center">
+  <div class="col">
+    <h3 class="mx-auto">
+      <small class="text-muted">
+        <%= link_to @match.age_group, age_group_path(@match.age_group) %> /
+        <%= link_to @match.division, division_path(@match.age_group, @match.division) %>
+      </small>
+    </h3>
+  </div>
+</div>
+<div class="row">
+  <div class="col text-right">
+    <h1><%= link_to @match.home_team.name, team_path(@match.home_id) %></h1>
+  </div>
+  <div class="col-50 my-auto">
+    <h3>vs.</h3>
+  </div>
+  <div class="col text-left">
+    <h1><%= link_to @match.away_team.name, team_path(@match.away_id) %></h1>
+  </div>
+</div>
+<div class="row">
+  <div class="col text-right">
+    <h3><small class="text-muted">Home Team</small></h3>
+  </div>
+  <div class="col-50">
+  </div>
+  <div class="col text-left">
+    <h3><small class="text-muted">Away Team</small></h3>
+  </div>
+</div>
+<div class="row mt-5">
+  <div class="col-md-8 offset-2">
+    <%= render "/partials/render_gmap", :lat => @match.ground.latitude, :long => @match.ground.longitude %>
+  </div>
+</div>
+<div class="row mt-5">
+  <div class="col-md-6 offset-3">
+    <h3 class="mx-auto text-center my-4">Match Preview</h3>
+    <p><%= @match.comments if @match.comments.present? %></p>
+  </div>
+</div>

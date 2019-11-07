@@ -1,8 +1,8 @@
 class FavsController < ApplicationController
   before_action :check_for_login
   def create
-    @fav = Fav.create fav_params
-    redirect_to user_path @fav.user.id
+    fav = Fav.create fav_params
+    redirect_to user_path fav.user.id
   end
 
   def new

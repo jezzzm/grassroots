@@ -28,6 +28,9 @@
           <li class="nav-item">
             <%= link_to 'Playing Fields', grounds_path, :class=> 'nav-link' %>
           </li>
+          <li class="nav-item">
+            <%= link_to 'Clubs', clubs_path, :class=> 'nav-link' %>
+          </li>
 
         </ul>
 
@@ -45,6 +48,7 @@
                 <%= link_to "Add Ground", new_ground_path, :class=> 'dropdown-item' %>
                 <%= link_to "Add Team", new_team_path, :class=> 'dropdown-item' %>
                 <%= link_to "Add Club", new_club_path, :class=> 'dropdown-item' %>
+                <%= link_to "Add Match", new_match_path, :class=> 'dropdown-item' %>
               </div>
             </li>
           <% end %>

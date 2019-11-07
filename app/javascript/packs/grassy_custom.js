@@ -92,26 +92,6 @@ $(document).ready(function() {
     $('#division-dd option').first().removeAttr('selected')
   }
 
-  $('#results-last').on('hide.bs.collapse', function () {
-    console.log('results hidden')
-    $('#results-more').text('More Results');
-  });
-  $('#results-last').on('show.bs.collapse', function () {
-    console.log('results shown')
-
-    $('#results-more').text('Fewer Results');
-  });
-
-  $('#fixtures-last').on('hide.bs.collapse', function () {
-    console.log('fixtures hidden')
-
-    $('#fixtures-more').text('More Fixtures');
-  });
-  $('#fixtures-last').on('show.bs.collapse', function () {
-    console.log('fixtures shown')
-
-    $('#fixtures-more').text('Fewer Fixtures');
-  });
 
   $('#club-dd').on('change', () => updateTeams('#teams'))
   $('#age-group-dd').on('change', () => updateTeams('#teams'))

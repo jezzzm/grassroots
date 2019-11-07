@@ -2,6 +2,7 @@ class Team < ActiveRecord::Base
   belongs_to :club, :optional => true
   has_many :favs, :dependent => :delete_all
   has_many :users, :through => :favs
+
   scope :ordered, -> {includes(:club).order('clubs.name', :age_group, :division)}
   scope :in_age_group, -> (age_group) {where(:age_group => age_group)}
   scope :in_division, -> (age_group, division) {where(:age_group => age_group, :division => division)}

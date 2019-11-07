@@ -1,4 +1,6 @@
 class TeamsController < ApplicationController
+  before_action :check_for_admin, :only => [:edit, :update, :destroy, :new]
+  
   def show
     @team = Team.find params[:id]
     @results = @team.results
@@ -10,12 +12,19 @@ class TeamsController < ApplicationController
     @b = Team.find params[:b]
 
     matches = Match.matchup(@a.id, @b.id)
-    @next = matches.last #TODO more robust
-    @last = matches.first #TODO more robust
+    @next = matches.fixtures.soonest_to_farthest.first
+    @last = matches.results.recent_to_oldest.first
 
-    data = LadderCreator.call(matches)
-    @a_stats = data[0][0] == @a.id ? data[0][1] : data[1][1]
-    @b_stats = data[0][0] == @b.id ? data[0][1] : data[1][1]
+    if @last.present?
+      data = LadderCreator.call(matches.results)
+      @a_stats = data[0][0][0] == @a.id ? data[0][0][1] : data[1][1][1]
+      @b_stats = data[0][0][0] == @b.id ? data[0][0][1] : data[1][1][1]
+    else
+      teams = TeamExtractor.call(matches)
+      data = StatScaffold.call(teams)
+      @a_stats = data[params[:a].to_i]
+      @b_stats = data[params[:b].to_i]
+    end
 
   end
 

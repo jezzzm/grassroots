@@ -16,14 +16,22 @@
       <section class="col">
         <div class="card h-100 bg-light">
           <div class="card-body text-center">
-            <h4 class="card-title text-left mb-4">Next Game
-              <% unless next_match(f.team).nil? %>
-                <% n = next_match(f.team) %>
-                 - <a href="<%= match_path n %>" alt="Link to next game">in <%= days_from_today n.game_date %> days</a>
-              <% end %>
-             </h4>
+            <div class="row justify-content-between mx-0">
+              <h4 class="card-title text-left mb-4">Next Game
+                <% unless next_match(f.team).nil? %>
+                  <% n = next_match(f.team) %>
+                   - <a href="<%= match_path n %>" alt="Link to next game">in <%= days_from_today n.game_date %></a>
+
+                   </h4>
+                  <h4 class="card-title text-right">
+                    <%= navigate_to n.ground.latitude, n.ground.longitude, 'btn btn-sm btn-outline-success', 'Nav' %>
+                  </h4>
+                <% end %>
+            </div>
+
+
              <% unless next_match(f.team).nil? %>
-              <h5 class="card-subtitle">
+              <h5>
                 <% opponent = other_team n, f.team.id %>
                 vs. <%= link_to opponent.name, opponent %>
                 at
@@ -32,7 +40,7 @@
               <p class="mt-3"><%= long_date_time n.game_date %></p>
               <%= link_to "Match Info", match_path(n), :class=> 'btn btn-outline-primary' %>
             <% else %>
-              <h5 class="card-subtitle">No games scheduled.</h5>
+              <h5>No games scheduled.</h5>
             <% end %>
           </div>
 
@@ -46,7 +54,7 @@
         <div class="card h-100 bg-light">
           <div class="card-body text-center">
             <h4 class="card-title text-left mb-4">Latest Result</h4>
-            <h5 class="card-subtitle">
+            <h5 class="card-score">
               <% unless last_match(f.team).nil? %>
                 <% l = last_match(f.team) %>
 

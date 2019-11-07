@@ -95,7 +95,7 @@ a.fav-team {
 
 .gmap {
   width: 100%;
-  height: 30em;
+  height: 25em;
 }
 
 .compact tr {
@@ -132,12 +132,12 @@ a.fav-team {
   top: -4px;
   left: 50%;
 }
-h5.card-subtitle .result-score {
+h5.card-score .result-score {
   padding: 0.2rem 0;
   font-size: 90%;
   min-width: 4.4rem;
 }
-h5.card-subtitle .result-score span {
+h5.card-score .result-score span {
   padding: 0;
 }
 span.form-hover-detail .result-score {

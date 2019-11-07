@@ -28,7 +28,7 @@ module MatchesHelper
   end
 
   def days_from_today(future_time)
-    ((future_time - Time.now)/1.day).floor
+    pluralize(((future_time - Time.now)/1.day).floor, 'day')
   end
 
 end
