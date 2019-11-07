@@ -1,3 +1,10 @@
-<h1 class="display-3">
-  Division Fixtures
-</h1>
+<h1 class="display-3">Division Fixtures</h1>
+<%= render "/partials/division_path" %>
+
+<%= render "/partials/fixtures_table" %>
+
+<div class="row">
+  <div class="col text-center mx-auto">
+    <%= paginate @fixtures, :class=> 'mx-auto' %>
+  </div>
+</div>

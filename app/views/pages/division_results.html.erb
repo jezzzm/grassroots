@@ -1,3 +1,6 @@
-<h1 class="display-3">
-  Division Results
-</h1>
+<h1 class="display-3">Division Results</h1>
+<%= render "/partials/division_path" %>
+
+<%= render "/partials/results_table" %>
+
+<%= paginate @results %>

@@ -1,13 +1,9 @@
 <h1 class="display-3">Team</h1>
-<h1>
-  <%= link_to(@team.age_group, age_group_path(@team.age_group)) %> /
-  <%= link_to(@team.division, division_path(@team.age_group, @team.division)) %> /
-  <%= @team.name %>
-</h1>
+<%= render "/partials/team_path" %>
 
-<h3 class="mt-5">Results</h3>
-<%= render "/partials/results", :results=> @results %>
+<h3>Results</h3>
+<%= render "/partials/results", :link_path => team_results_path(@team) %>
 <h3 class="mt-5">Fixtures</h3>
-<%= render "/partials/fixtures", :fixtures=> @fixtures %>
+<%= render "/partials/fixtures", :link_path => team_fixtures_path(@team) %>
 <h3 class="mt-5">Ladder</h3>
 <%= render "/partials/ladder", :age_group=> @team.age_group, :division=> @team.division, :specific_team=>nil %>

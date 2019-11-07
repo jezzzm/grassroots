@@ -19,18 +19,23 @@ class PagesController < ApplicationController
     one_round = Team.in_division(@age_group, @division).size/2
     @fixtures = div_matches.fixtures.soonest_to_farthest.page(1).per(one_round)
     @results = div_matches.results.recent_to_oldest.page(1).per(one_round)
+
   end
 
   def division_results
     @age_group = params[:age_group]
     @division = params[:division]
-    @results = Match.age_group(@age_group).division(@division).results.recent_to_oldest
+    @page = params[:page]
+    @results = Match.age_group(@age_group).division(@division).results.recent_to_oldest.page(@page)
+
+
   end
 
   def division_fixtures
     @age_group = params[:age_group]
     @division = params[:division]
-    @fixtures = Match.age_group(@age_group).division(@division).fixtures.soonest_to_farthest
+    @page = params[:page]
+    @fixtures = Match.age_group(@age_group).division(@division).fixtures.soonest_to_farthest.page(@page)
   end
 
   def age_group

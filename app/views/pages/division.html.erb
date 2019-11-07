@@ -1,6 +1,7 @@
 <h1 class="display-3">Division</h1>
-<h1><%= link_to @age_group, age_group_path(@age_group) %> / <%= @division %></h1>
-<h3 class="mt-5">Ladder</h3>
+<%= render "/partials/division_path" %>
+
+<h3>Ladder</h3>
 <%= render "/partials/ladder", :age_group=> @age_group, :division=> @division, :specific_team=> nil %>
 <h3 class="mt-5">Results</h3>
 <%= render "/partials/results", :link_path => division_results_path(@age_group, @division) %>

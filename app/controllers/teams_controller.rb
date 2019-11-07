@@ -18,4 +18,16 @@ class TeamsController < ApplicationController
     @b_stats = data[0][0] == @b.id ? data[0][1] : data[1][1]
 
   end
+
+  def results
+    @team = Team.find params[:id]
+    @page = params[:page]
+    @results = Match.team(@team).results.recent_to_oldest.page(@page)
+  end
+
+  def fixtures
+    @team = Team.find params[:id]
+    @page = params[:page]
+    @fixtures = Match.team(@team).fixtures.soonest_to_farthest.page(@page)
+  end
 end
