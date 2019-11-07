@@ -2,8 +2,8 @@ class PagesController < ApplicationController
   before_action :check_for_login, :only => [:dashboard]
 
   def index
-    @results = Match.results
-    @fixtures = Match.fixtures
+    @results = Match.results.page(1)
+    @fixtures = Match.fixtures.page(1)
     if @current_user.present? && @current_user.teams.present?
       redirect_to dashboard_path
     else
@@ -16,8 +16,21 @@ class PagesController < ApplicationController
     @age_group = params[:age_group]
     @division = params[:division]
     div_matches = Match.age_group(@age_group).division(@division)
-    @fixtures = div_matches.fixtures.soonest_to_farthest
-    @results = div_matches.results.recent_to_oldest
+    one_round = Team.in_division(@age_group, @division).size/2
+    @fixtures = div_matches.fixtures.soonest_to_farthest.page(1).per(one_round)
+    @results = div_matches.results.recent_to_oldest.page(1).per(one_round)
+  end
+
+  def division_results
+    @age_group = params[:age_group]
+    @division = params[:division]
+    @results = Match.age_group(@age_group).division(@division).results.recent_to_oldest
+  end
+
+  def division_fixtures
+    @age_group = params[:age_group]
+    @division = params[:division]
+    @fixtures = Match.age_group(@age_group).division(@division).fixtures.soonest_to_farthest
   end
 
   def age_group

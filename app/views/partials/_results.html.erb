@@ -1,4 +1,4 @@
-<% if results.present? %>
+<% if @results.present? %>
   <table class="table table-hover">
     <thead>
       <tr>
@@ -13,9 +13,8 @@
       </tr>
     </thead>
     <tbody>
-      <% max = 0 %>
-      <% results.each_with_index do |m, i| %>
-      <tr class="<%= "collapse multi-collapse" if i > 5 %>" id="<%= "results-last" if i == results.size - 1 %>">
+      <% @results.each do |m| %>
+      <tr>
         <td class="left-align"><time><%= short_date m.game_date %></time></td>
         <td class="left-align"><time><%= time_only m.game_date %></time></td>
         <td class="left-align"><%= link_to(m.ground.name, ground_path(m.ground.id)) %></td>
@@ -28,15 +27,13 @@
         <td class="left-align"><%= link_to(m.away_team.name, team_path(m.away_id), :class => team_classes(m.away_id)) %></td>
         <td class="right-align nobreak"><%= link_to("View →", match_path(m.id), :class=> "view-link") %></td>
       </tr>
-        <% max = i %>
       <% end %>
     </tbody>
   </table>
-  <% if max > 5 %>
-    <div>
-      <button class="btn btn-primary" type="button" id="results-more" data-toggle="collapse" data-target=".multi-collapse">More Results</button>
-    </div>
-  <% end %>
+<div class="row mx-auto mt-5">
+  <%= link_to "See All Results →", link_path, :class=> 'btn btn-outline-success mx-auto' %>
+</div>
+
 <% else %>
-  <h5>No results available.</h5>
+  <h3><small class="text-muted">No results available.</small></h3>
 <% end %>

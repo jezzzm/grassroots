@@ -3,6 +3,6 @@
 <h3 class="mt-5">Ladder</h3>
 <%= render "/partials/ladder", :age_group=> @age_group, :division=> @division, :specific_team=> nil %>
 <h3 class="mt-5">Results</h3>
-<%= render "/partials/results", :results=> @results %>
+<%= render "/partials/results", :link_path => division_results_path(@age_group, @division) %>
 <h3 class="mt-5">Fixtures</h3>
-<%= render "/partials/fixtures", :fixtures=> @fixtures %>
+<%= render "/partials/fixtures", :link_path => division_fixtures_path(@age_group, @division) %>

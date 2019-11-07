@@ -3,6 +3,8 @@ class Match < ActiveRecord::Base
   belongs_to :away_team, class_name: "Team", foreign_key: "away_id", :optional=> true
   belongs_to :ground, :optional=> true
 
+  paginates_per 10
+
   scope :age_group, -> (age_group) {where(:age_group => age_group)}
   scope :division, -> (division) {where(:division => division)}
   scope :results, -> {where('game_date < ?', Time.now).where.not(:home_score=> nil)}

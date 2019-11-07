@@ -23,10 +23,19 @@ Rails.application.routes.draw do
   patch 'users/:id/favs/:fav_id' => 'favs#update', :as => 'update_fav'
 
   #path for head-to-head comparison
+
   get '/teams/:a/:b' => 'teams#matchup', :as => 'matchup'
+
   #paths for age groups and divisions
+  get '/teams/:id/results' => 'teams#results', :as => 'team_results'
+  get '/teams/:id/fixtures' => 'teams#fixtures', :as => 'team_fixtures'
+  get '/:age_group/:division/results' => 'pages#division_results', :as=> 'division_results'
+  get '/:age_group/:division/fixtures' => 'pages#division_fixtures', :as=> 'division_fixtures'
   get '/:age_group/:division/:id', :to => redirect('/teams/:id')
+
   get '/:age_group/:division' => 'pages#division', :as=> 'division'
+
+
   get '/:age_group' => 'pages#age_group', :as=> 'age_group'
 
 
