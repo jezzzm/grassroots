@@ -9,15 +9,6 @@ class FavsController < ApplicationController
     @user = @current_user
     @fav = Fav.new
     @team = Team.find params[:team_id]
-
-  end
-
-  def find
-    @teams = Team.ordered
-    @team = @teams.first
-    @clubs = @teams.map{|t| t.club.name}.uniq.sort
-    @age_groups = @teams.pluck(:age_group).uniq.sort
-    @divisions = @teams.pluck(:division).uniq.sort
   end
 
   def edit

@@ -9,16 +9,14 @@ Rails.application.routes.draw do
 
   get '/dashboard' => 'pages#dashboard', :as=> 'dashboard'
   get '/navigator' => 'pages#navigator', :as => 'navigator'
-  get '/tester' => 'pages#tester'
+
   #login
   get '/login' => 'session#new'
   post '/login' => 'session#create'
   delete '/login' => 'session#destroy'
 
-  #custom paths for favourites - they should appear under user
-  get 'users/:id/favs/find' => 'favs#find', :as=> 'find_fav'
-  get 'users/:id/favs/new', :to => redirect('users/%{:id}/favs/find')
-
+  #custom paths for favourites - as they should appear under user
+  get 'users/:id/favs/new', :to => redirect('/navigator')
   get 'users/:id/favs/new/:team_id' => 'favs#new', :as=> 'new_fav'
   get 'users/:id/favs/:fav_id' => 'favs#show', :as => 'fav'
   delete 'users/:id/favs/:fav_id' => 'favs#destroy', :as => 'delete_fav'

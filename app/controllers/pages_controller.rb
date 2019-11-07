@@ -9,7 +9,6 @@ class PagesController < ApplicationController
     else
       render :latest
     end
-
   end
 
   def division
@@ -19,7 +18,6 @@ class PagesController < ApplicationController
     one_round = Team.in_division(@age_group, @division).size/2
     @fixtures = div_matches.fixtures.soonest_to_farthest.page(1).per(one_round)
     @results = div_matches.results.recent_to_oldest.page(1).per(one_round)
-
   end
 
   def division_results
@@ -27,8 +25,6 @@ class PagesController < ApplicationController
     @division = params[:division]
     @page = params[:page]
     @results = Match.age_group(@age_group).division(@division).results.recent_to_oldest.page(@page)
-
-
   end
 
   def division_fixtures
@@ -50,19 +46,10 @@ class PagesController < ApplicationController
 
   def navigator
     @teams = Team.ordered
-    @team = @teams.first
-    @clubs = @teams.map{|t| t.club.name}.uniq.sort # to populate club dropdown
-    @age_groups = @teams.pluck(:age_group).uniq.sort #to populate age_grop dd
-    @divisions = @teams.pluck(:division).uniq.sort #to populate division dd
+    @clubs = @teams.map{|t| t.club.name}.uniq.sort
+    @age_groups = @teams.pluck(:age_group).uniq.sort
+    @divisions = @teams.pluck(:division).uniq.sort
   end
 
-  def tester
-    @teams = Team.ordered
-    @team = @teams.first
-    @clubs = @teams.map{|t| t.club.name}.uniq.sort # to populate club dropdown
-    @age_groups = @teams.pluck(:age_group).uniq.sort #to populate age_grop dd
-    @divisions = @teams.pluck(:division).uniq.sort #to populate division dd
-
-  end
 
 end
