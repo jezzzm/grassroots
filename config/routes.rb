@@ -41,8 +41,4 @@ Rails.application.routes.draw do
 
   get '/:age_group' => 'pages#age_group', :as=> 'age_group'
 
-
-
-
-
 end
