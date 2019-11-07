@@ -8,9 +8,9 @@
       <% end %>
     </ol>
   <% end %>
-  <div class="form-group mt-5">
+  <div class="form-group">
     <%= f.label :email, "Enter Email" %>
-    <%= f.email_field :email, :required => true, :class => 'form-control', :placeholder => 'great@example.com' %>
+    <%= f.email_field :email, :required => true, :class => 'form-control', :placeholder => 'great@example.com', :autofocus => true %>
   </div>
   <div class="form-group">
     <%= f.label :name, "Enter Full Name" %>

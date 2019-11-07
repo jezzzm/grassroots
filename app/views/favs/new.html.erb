@@ -6,7 +6,7 @@
 </div>
 
 <div class="row mt-5">
-  <div class="col">
+  <div class="col-sm-12 offset-sm-0 col-md-6 offset-md-3">
     <%= form_for @fav do |f| %>
 
       <% if @user.errors.any? %>
@@ -22,7 +22,7 @@
 
       <div class="form-group">
         <%= f.label :name, "Tag" %>
-        <%= f.text_field :name, :class=> 'form-control', :placeholder => "Jimmy's Team" %>
+        <%= f.text_field :name, :class=> 'form-control', :placeholder => "Jimmy's Team", :autofocus => true %>
       </div>
 
       <div class="row mt-5">

@@ -2,7 +2,7 @@
 
 
   <% @favs.each do |f| %>
-    <div class="row mt-5">
+    <div class="row mt-5 pt-5">
       <div class="col">
         <h2>
           <%= f.name if f.name.present? %> /
@@ -58,9 +58,8 @@
               <% unless last_match(f.team).nil? %>
                   <% l = last_match(f.team) %>
                   <div class="row">
-                    <div class="col text-right">
-
-                      <h5 class="card-score my-auto"><%= link_to(l.home_team.name, team_path(l.home_id), :class => team_classes(team_id: l.home_id, home: true)) %></h5>
+                    <div class="col text-right my-auto">
+                      <h5 class="card-score"><%= link_to(l.home_team.name, team_path(l.home_id), :class => team_classes(team_id: l.home_id, home: true)) %></h5>
                     </div>
                     <div class="col-50 my-auto">
                       <h5 class="card-score"><%= render "/partials/score", :home_score=> l.home_score, :away_score=> l.away_score %></h5>

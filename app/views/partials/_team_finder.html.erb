@@ -19,9 +19,9 @@
     <table class="table table-borderless table-hover">
       <thead class="thead-dark">
         <tr>
-          <th scope="col" class="text-left">Club</th>
-          <th scope="col">Age Group</th>
-          <th scope="col">Division</th>
+          <th scope="col" class="text-left align-middle">Club</th>
+          <th scope="col" class="align-middle">Age Group</th>
+          <th scope="col" class="align-middle">Division</th>
           <th scope="col"></th>
           <% if @current_user.present? %>
             <th scope="col"></th>
@@ -31,16 +31,16 @@
       <tbody id="teams">
         <% @teams.each_with_index do |t, i| %>
         <tr class="grid-teams" data-club="<%= t.club.name %>" data-age="<%= t.age_group %>" data-div="<%= t.division %>">
-          <td class="text-left"><%= t.club.name %></td>
-          <td><%= t.age_group %></td>
-          <td><%= t.division %></td>
+          <td class="text-left align-middle"><%= t.club.name %></td>
+          <td class="align-middle"><%= t.age_group %></td>
+          <td class="align-middle"><%= t.division %></td>
           <% if @current_user.present? %>
-            <td>
+            <td class="align-middle">
               <%= link_to "Track Team", new_fav_path(@current_user.id, t.id), :class => 'btn badge badge-success' %>
             </td>
           <% end %>
 
-          <td><%= link_to "View →", team_path(t) %></td>
+          <td class="align-middle"><%= link_to "View →", team_path(t), :class => 'nobreak' %></td>
 
         </tr>
         <% end %>
