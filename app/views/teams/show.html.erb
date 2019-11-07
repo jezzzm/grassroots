@@ -1,5 +1,20 @@
-<h1 class="display-3">Team</h1>
-<%= render "/partials/team_path" %>
+<div class="row">
+  <div class="col">
+    <h1 class="display-3">Team</h1>
+    <%= render "/partials/team_path" %>
+  </div>
+  <% if @current_user.present? %>
+    <div class="col text-right my-auto">
+
+      <% if @team.fav_team?(@current_user) %>
+        <%= link_to "Already Tracking", user_path(@current_user), :class=> 'btn btn-warning' %>
+
+      <% else %>
+        <%= link_to "Track Team", new_fav_path(@current_user.id, @team.id), :class=> 'btn btn-success' %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
 
 <h3>Results</h3>
 <%= render "/partials/results", :link_path => team_results_path(@team) %>

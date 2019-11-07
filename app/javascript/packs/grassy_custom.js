@@ -1,77 +1,53 @@
 $(document).ready(function() {
-  function updateTeams(nodeID) {
-    const c = "#club-dd"
-    const ag = "#age-group-dd"
-    const d = "#division-dd"
-    const selectedClub = $(c).val();
-    const selectedAgeGroup = $(ag).val();
-    const selectedDivision = $(d).val();
+  function teamFilter(teams, filters) {
+    var _this = this;
 
+    this.init = function() {
+      this.teams = teams;
+      this.filters = filters;
+      this.bindEvents();
+    };
 
-    //update data visible in table
-    rows = $(nodeID).children()
-    for (let i = 0; i < rows.length; i++ ) {
-      const club = rows[i].querySelector('.club').innerText;
-      const ageGroup = rows[i].querySelector('.age-group').innerText;
-      const division = rows[i].querySelector('.division').innerText;
+    this.bindEvents = function() {
+      this.filters.click(this.filterTeams);
+      $('#reset').click(this.resetFilters);
+    };
 
-      if (selectedClub.length > 0) {
-        if (club == selectedClub) {
-          rows[i].style.display = "";
-        } else {
-          rows[i].style.display = "none";
+    this.filterTeams = function() {
+      //hide all
+      _this.teams.hide();
+      var filteredTeams =  _this.doFilter(_this.teams, $('.filter-attribs'));
+      //show filtered
+      filteredTeams.show();
+    };
+
+    this.resetFilters = function() {
+      _this.filters.attr('checked', false);
+      _this.teams.show();
+    };
+
+    this.doFilter = function(teams, filterAttribs) {
+      // for each attribute check the corresponding attribute filters selected
+      var filteredTeams = teams;
+      filterAttribs.each(function(){
+        var selectedFilters = $(this).find('input:checked');
+        // if any filter selected
+        if (selectedFilters.length > 0) {
+          filteredTeams = filteredTeams.filter(_this.getFilterString(selectedFilters));
         }
-        $(ag).prop('disabled', false)
-        if (selectedAgeGroup.length > 0) {
-          if (club == selectedClub && ageGroup == selectedAgeGroup) {
-            rows[i].style.display = "";
-          } else {
-            rows[i].style.display = "none";
-          }
-          $(d).prop('disabled', false)
-          if (selectedDivision.length > 0) {
-            if (club == selectedClub && ageGroup == selectedAgeGroup && division == selectedDivision) {
-              rows[i].style.display = "";
-            } else {
-              rows[i].style.display = "none";
-            }
-          }
-        } else {
-          visibleDivisions.includes(parseInt(division)) ? null : visibleDivisions.push(parseInt(division))
-          $(d).prop('disabled', true)
-        }
-      } else {
-        $(ag).prop('disabled', true)
-        rows[i].style.display = "none";
-        visibleAgeGroups.includes(ageGroup) ? null : visibleAgeGroups.push(ageGroup)
-        visibleDivisions.includes(parseInt(division)) ? null : visibleDivisions.push(parseInt(division))
-      }
+      });
+      return filteredTeams;
+    };
 
-    }
+    this.getFilterString = function(selectedFilters) {
+      var selectedFilterValues = [];
+      selectedFilters.each(function() {
+        var currentFilter = $(this);
+        selectedFilterValues.push(`[data-${currentFilter.attr('name')}='${currentFilter.val()}']`);
 
-
-
-    //update dropdowns
-  //   visibleAgeGroups.sort()
-  //   visibleDivisions.sort()
-  //
-  //   $(ag).empty()
-  //   // $(ag).append(`<option value=""></option>`)
-  //   for (let i = 0; i < visibleAgeGroups.length; i++) {
-  //     $(ag).append(`<option value="${visibleAgeGroups[i]}">${visibleAgeGroups[i]}</option>`)
-  //     $(`${ag}:last-child`).val() == selectedAgeGroup ? $(`${ag}:last-child`).attr('selected', 'selected'): null;
-  //   }
-  //
-  //   $(d).empty()
-  //   // $(d).append(`<option value=""></option>`)
-  //   for (let i = 0; i < visibleDivisions.length; i++) {
-  //     $(d).append(`<option value="${visibleDivisions[i]}">${visibleDivisions[i]}</option>`)
-  //     $(`${d}:last-child`).val() == selectedDivision ? $(`${d}:last-child`).attr('selected', 'selected'): null;
-  //   }
-  };
-
-  function filterIt() {
-
+      });
+      return selectedFilterValues.join(',');
+    };
   }
 
   function searchGround() {
@@ -81,23 +57,34 @@ $(document).ready(function() {
     });
   }
 
-  function resetFilters() {
-    //toggle and reset
-    $('#club-dd option').first().attr('selected', 'selected')
-    $('#age-group-dd option').first().attr('selected', 'selected')
-    $('#division-dd option').first().attr('selected', 'selected')
-    updateTeams('#teams')
-    $('#club-dd option').first().removeAttr('selected')
-    $('#age-group-dd option').first().removeAttr('selected')
-    $('#division-dd option').first().removeAttr('selected')
+  function searchClub() {
+    const value = $(this).val().toLowerCase();
+    $("#clubs li.club").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
   }
 
+  $('#clubs-heading').on('click', function() {
+    $('#clubs-arrow').toggleClass('fa-chevron-down')
+    $('#clubs-arrow').toggleClass('fa-chevron-up')
+  });
+  $('#ages-heading').on('click', function() {
+    $('#ages-arrow').toggleClass('fa-chevron-down')
+    $('#ages-arrow').toggleClass('fa-chevron-up')
+  });
+  $('#divs-heading').on('click', function() {
+    $('#divs-arrow').toggleClass('fa-chevron-down')
+    $('#divs-arrow').toggleClass('fa-chevron-up')
+  });
 
-  $('#club-dd').on('change', () => updateTeams('#teams'))
-  $('#age-group-dd').on('change', () => updateTeams('#teams'))
-  $('#division-dd').on('change', () => updateTeams('#teams'))
-  $('#reset-filters').on('click', resetFilters)
 
+
+  $('#club-search').on('keyup blur', searchClub)
   $('#ground-search').on('keyup blur', searchGround)
+
+  var $teams = $('.grid-teams');
+  var $filters = $("#filters input[type='checkbox']");
+  var team_filter = new teamFilter($teams, $filters);
+  team_filter.init();
 
 });

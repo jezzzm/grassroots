@@ -32,6 +32,11 @@ class Team < ActiveRecord::Base
     "#{self.club.name}#{" " + self.identifier if self.identifier.present?}"
   end
 
+  def fav_team?(user)
+
+    user.present? && user.teams.include?(self)
+  end
+
 
   def ladder_position
     matches = Match.age_group(self.age_group).division(self.division).results

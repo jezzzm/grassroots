@@ -1,39 +1,41 @@
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th><abbr title="Position" class="title">#</abbr></th>
-      <th class="left-align">Team</th>
-      <th><abbr title="Matches Played" class="title">MP</abbr></th>
-      <th><abbr title="Wins" class="title">W</abbr></th>
-      <th><abbr title="Losses" class="title">L</abbr></th>
-      <th><abbr title="Draws" class="title">D</abbr></th>
-      <th><abbr title="Goals For" class="title">GF</abbr></th>
-      <th><abbr title="Goals Against" class="title">GA</abbr></th>
-      <th><abbr title="Goal Difference" class="title">GD</abbr></th>
-      <th>Points</th>
-      <th>Form</th>
-    </tr>
-  </thead>
-  <tbody class="<%= "compact" if specific_team.present? %>">
-    <% ladder = get_ladder(age_group, division, specific_team) %>
-    <% ladder.each do |pos| %>
-      <% position = pos.keys.first + 1 %>
-      <% id = pos.values.first.first %>
-      <% team = Team.find id %>
-      <% stats = pos.values.first.last %>
-      <tr class="<%= team_classes id %>">
-        <td><%= position %></td>
-        <td class="left-align"><%= link_to(stats[:name], team_path(id), :class=> team_classes(id)) %></td>
-        <td><%= stats[:mp] %></td>
-        <td><%= stats[:w] %></td>
-        <td><%= stats[:l] %></td>
-        <td><%= stats[:d] %></td>
-        <td><%= stats[:gf] %></td>
-        <td><%= stats[:ga] %></td>
-        <td><%= stats[:gd] %></td>
-        <td class="table-highlight"><%= stats[:pts] %></td>
-        <td ><%= render "/partials/team_form", :team => team %></td>
+<div class="table-responsive" id="ladder">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th><abbr title="Position" class="title">#</abbr></th>
+        <th class="left-align">Team</th>
+        <th><abbr title="Matches Played" class="title">MP</abbr></th>
+        <th><abbr title="Wins" class="title">W</abbr></th>
+        <th><abbr title="Losses" class="title">L</abbr></th>
+        <th><abbr title="Draws" class="title">D</abbr></th>
+        <th><abbr title="Goals For" class="title">GF</abbr></th>
+        <th><abbr title="Goals Against" class="title">GA</abbr></th>
+        <th><abbr title="Goal Difference" class="title">GD</abbr></th>
+        <th>Points</th>
+        <th>Form</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody class="<%= "compact" if specific_team.present? %>">
+      <% ladder = get_ladder(age_group, division, specific_team) %>
+      <% ladder.each do |pos| %>
+        <% position = pos.keys.first + 1 %>
+        <% id = pos.values.first.first %>
+        <% team = Team.find id %>
+        <% stats = pos.values.first.last %>
+        <tr class="<%= team_classes id %>">
+          <td><%= position %></td>
+          <td class="left-align"><%= link_to(stats[:name], team_path(id), :class=> team_classes(id)) %></td>
+          <td><%= stats[:mp] %></td>
+          <td><%= stats[:w] %></td>
+          <td><%= stats[:l] %></td>
+          <td><%= stats[:d] %></td>
+          <td><%= stats[:gf] %></td>
+          <td><%= stats[:ga] %></td>
+          <td><%= stats[:gd] %></td>
+          <td class="table-highlight"><%= stats[:pts] %></td>
+          <td ><%= render "/partials/team_form", :team => team %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

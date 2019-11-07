@@ -53,7 +53,16 @@ class PagesController < ApplicationController
     @team = @teams.first
     @clubs = @teams.map{|t| t.club.name}.uniq.sort # to populate club dropdown
     @age_groups = @teams.pluck(:age_group).uniq.sort #to populate age_grop dd
-    @divisions = @teams.pluck(:division).uniq.sort #to populdate division dd
+    @divisions = @teams.pluck(:division).uniq.sort #to populate division dd
+  end
+
+  def tester
+    @teams = Team.ordered
+    @team = @teams.first
+    @clubs = @teams.map{|t| t.club.name}.uniq.sort # to populate club dropdown
+    @age_groups = @teams.pluck(:age_group).uniq.sort #to populate age_grop dd
+    @divisions = @teams.pluck(:division).uniq.sort #to populate division dd
+
   end
 
 end

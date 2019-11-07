@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   get '/dashboard' => 'pages#dashboard', :as=> 'dashboard'
   get '/navigator' => 'pages#navigator', :as => 'navigator'
+  get '/tester' => 'pages#tester'
   #login
   get '/login' => 'session#new'
   post '/login' => 'session#create'
@@ -16,12 +17,14 @@ Rails.application.routes.draw do
 
   #custom paths for favourites - they should appear under user
   get 'users/:id/favs/find' => 'favs#find', :as=> 'find_fav'
-  post 'users/:id/favs/new' => 'favs#new', :as=> 'new_fav'
+  get 'users/:id/favs/new', :to => redirect('users/%{:id}/favs/find')
+
+  get 'users/:id/favs/new/:team_id' => 'favs#new', :as=> 'new_fav'
   get 'users/:id/favs/:fav_id' => 'favs#show', :as => 'fav'
   delete 'users/:id/favs/:fav_id' => 'favs#destroy', :as => 'delete_fav'
   get 'users/:id/favs/:fav_id/edit' => 'favs#edit', :as => 'edit_fav'
-  get 'users/:id/favs', :to => redirect('/users/%{id}')
-  post 'users/:id/favs/index' => 'favs#create'
+  get 'users/:id/favs/index' => 'favs#index', :as => 'favs'
+  post 'users/:id/favs/:team_id' => 'favs#create'
   patch 'users/:id/favs/:fav_id' => 'favs#update', :as => 'update_fav'
 
   #paths for age groups and divisions

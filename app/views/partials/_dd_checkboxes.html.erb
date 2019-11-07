@@ -1,0 +1,22 @@
+<div class="row ml-0">
+  <div class="w-100 filter-attribs" role="tablist">
+    <a class="collapsed text-decoration-none" data-toggle="collapse" href="#<%= abbr %>s" aria-expanded="false" aria-controls="<%= abbr %>s">
+      <li class="list-group-item list-group-item-secondary d-flex justify-content-between border-bottom border-white" role="tab" id="<%= abbr %>s-heading">
+        <span><%= name %></span>
+        <i class="fas fa-chevron-down" id="<%= abbr %>s-arrow"></i>
+      </li>
+    </a>
+
+    <div id="<%= abbr %>s" class="collapse fade" role="tabpanel" aria-labelledby="<%= abbr %>s-heading">
+      <% if search %>
+        <%= render "/partials/search_section", :abbr => abbr, :text => "Find #{abbr.titlecase}" %>
+      <% end %>
+      <% data.each_with_index do |d, i| %>
+        <li class="list-group-item py-0 <%= abbr %>">
+          <%= check_box_tag("#{abbr}", d, false, :id => "#{abbr}#{i}", :class => 'align-middle') %>
+          <%= label_tag("#{abbr}#{i}", d, :class => 'my-0 py-2 h-100 w-75 pl-2 align-middle') %>
+        </li>
+      <% end %>
+    </div>
+  </div>
+</div>

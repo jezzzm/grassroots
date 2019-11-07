@@ -174,3 +174,6 @@ table#ground-list td .btn {
 .tcol-60 {
   width: 60%;
 }
+#clubs li:nth-child(0n + 2) {
+  border-top: 0;
+}

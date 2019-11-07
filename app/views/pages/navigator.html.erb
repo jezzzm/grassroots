@@ -1,55 +1,7 @@
-<h1 class="display-3">Team Navigator</h1>
-
-
-<%= form_tag(@team, {:class => 'row mt-5'}) do  %>
-  <div class="col-md-6">
-    <div class="form-group">
-      <%= label_tag :club %>
-      <%= select_tag :club, options_for_select(@clubs), :id => 'club-dd', :class=> 'form-control d-inline-block', :include_blank=> true  %>
-    </div>
+<div class="row">
+  <div class="col">
+    <h1 class="display-3">Team Navigator</h1>
   </div>
-  <div class="col-md-2">
-    <div class="form-group">
-      <%= label_tag :age_group %>
-      <%= select_tag :age_group, options_for_select(@age_groups), :id => 'age-group-dd', :class=> 'form-control d-inline-block', :include_blank => true, :disabled => true  %>
-    </div>
-  </div>
-  <div class="col-md-2 ">
-    <div class="form-group">
-      <%= label_tag :division %>
-      <%= select_tag :division, options_for_select(@divisions), :id => 'division-dd', :class=> 'form-control d-inline-block', :include_blank => true, :disabled => true  %>
-    </div>
-  </div>
-  <div class="col-md-2 mt-auto">
-    <div class="form-group text-center">
-      <button type="button" id="reset-filters" class="btn btn-primary">Reset <i class="fas fa-redo-alt pl-1"></i></button>
-    </div>
+</div>
 
-  </div>
-
-
-<% end %>
-
-
-
-<table class="table mt-5">
-  <thead>
-    <tr>
-      <th scope="col">Club</th>
-      <th scope="col">Age Group</th>
-      <th scope="col">Division</th>
-      <th scope="col"></th>
-    </tr>
-  </thead>
-  <tbody id="teams">
-    <% @teams.each_with_index do |t, i| %>
-    <tr style="display:none">
-      <td class="club"><%= t.club.name %></td>
-      <td class="age-group"><%= t.age_group %></td>
-      <td class="division"><%= t.division %></td>
-      <td><%= link_to "View →", team_path(t) %></td>
-    </tr>
-    <% end %>
-
-  </tbody>
-</table>
+<%= render "/partials/team_finder" %>

@@ -19,13 +19,13 @@
   </div>
 </div>
 <div class="row">
-  <div class="col text-right">
+  <div class="col text-right my-auto">
     <h1><%= link_to @match.home_team.name, team_path(@match.home_id) %></h1>
   </div>
   <div class="col-50 my-auto">
     <h3><%= render "/partials/score", :home_score=> @match.home_score, :away_score=> @match.away_score %></h3>
   </div>
-  <div class="col text-left">
+  <div class="col text-left my-auto">
     <h1><%= link_to @match.away_team.name, team_path(@match.away_id) %></h1>
   </div>
 </div>

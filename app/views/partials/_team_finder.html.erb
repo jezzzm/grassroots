@@ -1,0 +1,50 @@
+<div class="row mt-5 mb-3 ml-0">
+  <div class="col-md-3">
+    <li class="d-flex justify-content-between align-items-end">
+      <h5 class="mb-0"><strong>Refine</strong></h5>
+      <a href="#" class="btn btn-sm btn-outline-dark" id="reset">Reset</a>
+    </li>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-3" id="filters">
+    <ul class="list-group-flush pl-0">
+      <%= render "/partials/dd_checkboxes", :name => 'Clubs', :abbr => 'club', :data => @clubs, :search => true %>
+      <%= render "/partials/dd_checkboxes", :name => 'Age Groups', :abbr => 'age', :data => @age_groups, :search => false %>
+      <%= render "/partials/dd_checkboxes", :name => 'Division', :abbr => 'div', :data => @divisions, :search => false %>
+    </ul>
+  </div>
+  <div class="col ml-md-5">
+    <table class="table table-borderless table-hover">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col" class="text-left">Club</th>
+          <th scope="col">Age Group</th>
+          <th scope="col">Division</th>
+          <th scope="col"></th>
+          <% if @current_user.present? %>
+            <th scope="col"></th>
+          <% end %>
+        </tr>
+      </thead>
+      <tbody id="teams">
+        <% @teams.each_with_index do |t, i| %>
+        <tr class="grid-teams" data-club="<%= t.club.name %>" data-age="<%= t.age_group %>" data-div="<%= t.division %>">
+          <td class="text-left"><%= t.club.name %></td>
+          <td><%= t.age_group %></td>
+          <td><%= t.division %></td>
+          <% if @current_user.present? %>
+            <td>
+              <%= link_to "Track Team", new_fav_path(@current_user.id, t.id), :class => 'btn badge badge-success' %>
+            </td>
+          <% end %>
+
+          <td><%= link_to "View →", team_path(t) %></td>
+
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
