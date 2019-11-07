@@ -1,10 +1,5 @@
 module MatchesHelper
 
-  def get_ladder(age_group, division)
-    matches = Match.get_matches(age_group: age_group,division: division, dates: 'results')
-    LadderCreator.call(matches)
-  end
-
   #get other team in match
   def other_team match, this_team_id
     other = match.teams.select {|t| t != this_team_id}.first

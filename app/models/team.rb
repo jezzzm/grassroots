@@ -2,19 +2,21 @@ class Team < ActiveRecord::Base
   belongs_to :club, :optional => true
   has_many :favs, :dependent => :delete_all
   has_many :users, :through => :favs
-  scope :club_name, ->(club) {where(:club => club).name == club_name }
+  scope :ordered, -> {includes(:club).order('clubs.name', :age_group, :division)}
+  scope :in_age_group, -> (age_group) {where(:age_group => age_group)}
+  scope :in_division, -> (age_group, division) {where(:age_group => age_group, :division => division)}
 
   #INSTANCE METHODS
   def matches   # method to replace "has_many :matches"
-    Match.where(:home_id => self.id).or(Match.where(:away_id => self.id))
+    Match.team(self.id)
   end
 
   def results
-    self.matches.where('game_date < ?', Time.now).where.not(:home_score => nil).order(:game_date => :desc)
+    self.matches.results.recent_to_oldest
   end
 
   def fixtures
-    self.matches.where('game_date > ?', Time.now).order(:game_date)
+    self.matches.fixtures.soonest_to_farthest
   end
 
   def home_matches
@@ -30,8 +32,8 @@ class Team < ActiveRecord::Base
   end
 
 
-  def ladder_position after_round=0
-    matches = Match.get_matches(:age_group => self.age_group, :division => self.division, :round_limit => after_round, :dates => 'results')
+  def ladder_position
+    matches = Match.age_group(self.age_group).division(self.division).results
     ladder = LadderCreator.call(matches)
     ladder.index( ladder.detect { |id, hash| self.id == id } ) + 1
   end

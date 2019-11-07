@@ -159,7 +159,8 @@ h3.mx-auto .result-score span {
   align-items:center;
   justify-content:flex-end;
 }
-table#ground-list td{
+table#ground-list td,
+table#ground-list th{
   text-align: left;
   vertical-align: middle;
 }

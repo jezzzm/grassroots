@@ -15,29 +15,25 @@
     </tr>
   </thead>
   <tbody class="<%= "compact" if specific_team.present? %>">
-    <% ladder = get_ladder(age_group, division) %>
-    <% this_team = -1 %>
-    <% if specific_team.present? %>
-      <% this_team = ladder.index(ladder.detect {|id, stats| id == specific_team }) %>
-    <% end %>
-    <% ladder.each_with_index do |t, i| %>
-      <% if specific_team.blank? || (i.between?(this_team - 1, this_team + 1) && i.between?(0, ladder.size - 1)) %>
-        <% team = Team.find t[0] %>
-        <tr class="<%= team_classes team.id %>">
-          <td><%= i + 1 %></td>
-          <td class="left-align"><%= link_to(t[1][:name], team_path(t[0]), :class=> team_classes(t[0])) %></td>
-
-          <td><%= t[1][:mp] %></td>
-          <td><%= t[1][:w] %></td>
-          <td><%= t[1][:l] %></td>
-          <td><%= t[1][:d] %></td>
-          <td><%= t[1][:gf] %></td>
-          <td><%= t[1][:ga] %></td>
-          <td><%= t[1][:gd] %></td>
-          <td class="table-highlight"><%= t[1][:pts] %></td>
-          <td ><%= render "/partials/team_form", :team => team %></td>
-        </tr>
-      <% end %>
+    <% ladder = get_ladder(age_group, division, specific_team) %>
+    <% ladder.each do |pos| %>
+      <% position = pos.keys.first + 1 %>
+      <% id = pos.values.first.first %>
+      <% team = Team.find id %>
+      <% stats = pos.values.first.last %>
+      <tr class="<%= team_classes id %>">
+        <td><%= position %></td>
+        <td class="left-align"><%= link_to(stats[:name], team_path(id), :class=> team_classes(id)) %></td>
+        <td><%= stats[:mp] %></td>
+        <td><%= stats[:w] %></td>
+        <td><%= stats[:l] %></td>
+        <td><%= stats[:d] %></td>
+        <td><%= stats[:gf] %></td>
+        <td><%= stats[:ga] %></td>
+        <td><%= stats[:gd] %></td>
+        <td class="table-highlight"><%= stats[:pts] %></td>
+        <td ><%= render "/partials/team_form", :team => team %></td>
+      </tr>
     <% end %>
   </tbody>
 </table>
