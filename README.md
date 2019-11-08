@@ -1,24 +1,14 @@
-# README
+# grassy: Project 1 @ GA sydney
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+grassy is a platform for simple, intuitive grassroots competition management. The first proof of concept is for a local soccer association and forms the second project for the Software Engineering Immersive at General Assembly, Sydney.
 
-Things you may want to cover:
+The primary aim for this project is to produce a Rails-based CRUD for users, matches, clubs, grounds, with the capability for users to keep track of their favourite teams. The project is [deployed on Heroku](https://grassy.herokuapp.com/).
 
-* Ruby version
+## Minimum Requirements
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Design objectives
+## Technologies Utilised
+## Getting Started
+## Reflections on Development
+## Further Development
+## Source
