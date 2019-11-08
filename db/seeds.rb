@@ -53,7 +53,7 @@ def generate_matchups(team_ids)
   bottom_row = team_ids.drop(len/2)
 
   matchups = []
-  (len * 2 - 2).times do |r| #draw generation algo (hardcoded for 10 team comp)
+  (len * 2 - 2).times do |r|
     round = []
     r.odd? ? round << [first, bottom_row.first] : round << [bottom_row.first, first]
     (0..top_row.size - 1).each do |i|
@@ -66,7 +66,7 @@ def generate_matchups(team_ids)
   matchups
 end
 
-def generate_random_data(age_group, division, team_count=10, start_date="2019-03-30")
+def generate_random_data(age_group, division, team_count=10, start_date="2018-09-28")
   identifiers = %w(Red Blue Green Yellow Wombats Wombats Possums Kangas Slugs Kittens Cats Cats Cats Pink Lilac)
   these_teams = [] #array containing ids
   team_count.times do |i|
@@ -107,6 +107,7 @@ def generate_random_data(age_group, division, team_count=10, start_date="2019-03
       m.save
     end
   end
+  puts("created #{age_group}/#{division} - #{team_count} teams")
   # binding.pry
 
 end
@@ -121,10 +122,30 @@ Match.destroy_all
 generate_random_data('O35', '1')
 generate_random_data('O35', '2')
 generate_random_data('O35', '3')
+generate_random_data('U06', '1')
+generate_random_data('U06', '2')
+generate_random_data('U07', '1')
+generate_random_data('U08', '1')
+generate_random_data('U08', '2')
+generate_random_data('U09', '1')
+generate_random_data('U09', '2')
+generate_random_data('U09', '3')
+generate_random_data('U10', '1')
+generate_random_data('U11', '1')
+generate_random_data('U12', '1')
+generate_random_data('U13', '1')
+generate_random_data('U14', '1')
+generate_random_data('U15', '1')
+generate_random_data('U16', '1')
+generate_random_data('U18', '1')
+generate_random_data('U18', '2')
+generate_random_data('U18', '3')
 generate_random_data('U21', '1', 12, "2019-08-17")
 generate_random_data('U21', '2', 12, "2019-08-17")
-generate_random_data('SL', '1', 12, "2019-07-27")
-generate_random_data('SL', '2', 12, "2019-07-27")
+generate_random_data('SL', '1', 12, "2019-08-27")
+generate_random_data('SL', '2', 12, "2019-08-27")
+generate_random_data('PL', '1', 12, "2019-08-27")
+generate_random_data('PL', '2', 12, "2019-08-27")
 generate_random_data('AA', '1', 10, "2019-09-28")
 generate_random_data('AA', '2', 10, "2019-09-28")
 generate_random_data('AA', '3', 10, "2019-09-28")

@@ -7,7 +7,7 @@ class PagesController < ApplicationController
     if @current_user.present? && @current_user.teams.present?
       redirect_to dashboard_path
     else
-      render :latest
+      render :landing
     end
   end
 

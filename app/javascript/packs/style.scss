@@ -1,4 +1,8 @@
+
 @import '~bootstrap/scss/bootstrap';
+
+@import url('https://fonts.googleapis.com/css?family=Pompiere&display=swap');
+
 
 td, th {
   text-align: center;
@@ -176,4 +180,20 @@ table#ground-list td .btn {
 }
 #clubs li:nth-child(0n + 2) {
   border-top: 0;
+}
+#feature {
+  background-image: url('/assets/splash.jpg');
+  background-size: auto;
+  background-repeat: no-repeat;
+
+}
+.larger {
+  font-size: 3rem;
+}
+
+.grassy {
+  font-family: 'Pompiere', cursive;
+}
+.logo-big {
+  font-size: 9rem;
 }
