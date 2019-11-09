@@ -7,6 +7,7 @@ class Team < ActiveRecord::Base
   scope :in_age_group, -> (age_group) {where(:age_group => age_group)}
   scope :in_division, -> (age_group, division) {where(:age_group => age_group, :division => division)}
 
+
   #INSTANCE METHODS
   def matches   # method to replace "has_many :matches"
     Match.team(self.id)
@@ -33,10 +34,8 @@ class Team < ActiveRecord::Base
   end
 
   def fav_team?(user)
-
     user.present? && user.teams.include?(self)
   end
-
 
   def ladder_position
     matches = Match.age_group(self.age_group).division(self.division).results
@@ -45,13 +44,8 @@ class Team < ActiveRecord::Base
   end
 
   def form(n = 5) # return [ ['W', match_id], ['L', match_id], etc x n]
-    matches = self.results.order(:game_date => :desc).limit(n).pluck(:id)
+    matches = self.results.recent_to_oldest.limit(n).pluck(:id)
     matches.map! {|match_id| [match_id, ResultGetter.call(match_id, self.id)]}.reverse!
-  end
-
-  #CLASS METHODS
-  def self.comp_teams(age_group, division)
-    self.where(:age_group => age_group, :division => division)
   end
 
 end

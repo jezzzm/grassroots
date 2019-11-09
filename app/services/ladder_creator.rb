@@ -3,7 +3,7 @@ class LadderCreator < ApplicationService
     @matches = match_collection
   end
 
-  def call #buld ladder from collection of matches
+  def call #build ladder from collection of matches
     teams = TeamExtractor.call(@matches)
     scaffs = StatScaffold.call(teams)
     @matches.each do |m|

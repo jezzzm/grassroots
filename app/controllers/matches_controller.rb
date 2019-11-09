@@ -1,6 +1,7 @@
 class MatchesController < ApplicationController
   before_action :check_for_admin, :only => [:edit, :update, :destroy, :new, :create]
   def index
+    redirect_to navigator_path
   end
 
   def show
@@ -31,7 +32,6 @@ class MatchesController < ApplicationController
 
   def update
     match = Match.find params[:id]
-
     match.update match_params
     redirect_to match_path match
   end

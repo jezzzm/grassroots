@@ -2,8 +2,6 @@ class PagesController < ApplicationController
   before_action :check_for_login, :only => [:dashboard]
 
   def index
-    @results = Match.results.page(1)
-    @fixtures = Match.fixtures.page(1)
     if @current_user.present? && @current_user.teams.present?
       redirect_to dashboard_path
     else
