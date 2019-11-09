@@ -14,13 +14,13 @@
   </h3>
 </div>
 <div class="row">
-  <div class="col text-right">
+  <div class="col text-right my-auto">
     <h1><%= link_to @a.name, @a %></h1>
   </div>
   <div class="col-50 my-auto">
     <h3><small class="text-muted">vs</small></h3>
   </div>
-  <div class="col text-left">
+  <div class="col text-left my-auto">
     <h1><%= link_to @b.name, @b %></h1>
   </div>
 </div>
@@ -28,7 +28,7 @@
 <table class="table text-center mt-5 table-hover">
   <tbody>
     <tr>
-      <td colspan="3"><strong><%= @a_stats[:mp] %> Games Played</strong></td>
+      <td colspan="3"><strong> <%= pluralize @a_stats[:mp], 'Game' %> Played</strong></td>
     </tr>
     <tr>
       <td><p class="my-0"><strong>Won</strong></p><p class="my-0"><%= @a_stats[:w] %></p></td>
@@ -54,14 +54,14 @@
 <% if @last.present? && @last.home_score != nil%>
   <div class="row my-3">
     <div class="col">
-      <h4 class="text-right">
+      <h4 class="text-right my-auto">
           <%= link_to(@last.home_team.name, team_path(@last.home_id), :class => team_classes(team_id: @last.home_id, home: true)) %>
       </h4>
     </div>
-    <div class="col-50">
+    <div class="col-50 my-auto">
       <h4><%= render "/partials/score", :home_score=> @last.home_score, :away_score=> @last.away_score %></h4>
     </div>
-    <div class="col">
+    <div class="col my-auto">
       <h4 class="text-left">
         <%= link_to(@last.away_team.name, team_path(@last.away_id), :class => team_classes(team_id: @last.away_id)) %>
       </h4>

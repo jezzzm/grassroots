@@ -7,6 +7,7 @@ class LadderCreator < ApplicationService
     teams = TeamExtractor.call(@matches)
     scaffs = StatScaffold.call(teams)
     @matches.each do |m|
+      #accumulate results into one set of stats for each team
       scaffs[m.home_id], scaffs[m.away_id] = StatParser.call(m, scaffs[m.home_id], scaffs[m.away_id])
     end
     LadderSorter.call scaffs
