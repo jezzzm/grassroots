@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   get '/dashboard' => 'pages#dashboard', :as=> 'dashboard'
   get '/navigator' => 'pages#navigator', :as => 'navigator'
+  get '/chart_tester' => 'pages#chart_test'
 
   #login
   get '/login' => 'session#new'

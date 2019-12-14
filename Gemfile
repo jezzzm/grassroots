@@ -23,6 +23,7 @@ gem 'bcrypt', '~> 3.1.7'
 # gem 'geocoder'
 gem 'kaminari'
 gem 'chartkick'
+gem 'groupdate'
 
 gem 'pry-rails'
 # Reduces boot times through caching; required in config/boot.rb

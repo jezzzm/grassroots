@@ -49,5 +49,10 @@ class PagesController < ApplicationController
     @divisions = @teams.pluck(:division).uniq.sort
   end
 
+  def chart_test
+    matches = Match.age_group('PL').division('1').results
+    @data = StatsOverTime.new(matches).call(:gf)
+  end
+
 
 end

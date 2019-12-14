@@ -9,17 +9,16 @@ class StatsOverTime < ApplicationService
   #call StatParser match by match
   #assign results to obj with key: round # and vals: match stats
   #create and sort ladders round by round
-  def call
-    rounds = Hash.new { |h, k| h[k] = {} }
+
+  def call stat
+    data = Hash.new { |h, k| h[k] = {} }
     @matches.each do |m|
       teams = [m.home_team, m.away_team]
       scaffs = StatScaffold.call(teams)
       scaffs[m.home_id], scaffs[m.away_id] = StatParser.call(m, scaffs[m.home_id], scaffs[m.away_id])
-      rounds[m.round][m.home_id] = scaffs[m.home_id]
-      rounds[m.round][m.away_id] = scaffs[m.away_id]
-
+      data[m.home_team.name][m.round] = scaffs[m.home_id][stat]
+      data[m.away_team.name][m.round] = scaffs[m.away_id][stat]
     end
-    rounds
-
+    data.map {|team| {:name => team[0], :data => team[1]}}
   end
 end
