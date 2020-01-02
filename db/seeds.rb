@@ -113,7 +113,7 @@ def generate_random_data(age_group, division, team_count=10, start_date="2018-09
 end
 
 User.destroy_all
-u1 = User.create :email=> "jez.milledge@gmail.com", :name=> "Jeremy Milledge", :password => 'chicken', :admin=> true
+u1 = User.create :email=> "jez@ga.co", :name=> "Jeremy Milledge", :password => 'chicken', :admin=> true
 u2 = User.create :email=> "jt@ga.co", :name=> "JT", :password => 'chicken', :admin=> false
 puts "created #{User.count} users"
 

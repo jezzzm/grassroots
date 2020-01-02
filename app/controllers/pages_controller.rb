@@ -1,5 +1,6 @@
 class PagesController < ApplicationController
   before_action :check_for_login, :only => [:dashboard]
+  layout :home_layout, :only => :index
 
   def index
     if @current_user.present? && @current_user.teams.present?
@@ -13,7 +14,7 @@ class PagesController < ApplicationController
     @age_group = params[:age_group]
     @division = params[:division]
     div_matches = Match.age_group(@age_group).division(@division)
-    one_round = Team.in_division(@age_group, @division).size/2
+    one_round = Team.in_division(@age_group, @division).size/2 #number of games per round - dependent on num teams in div
     @fixtures = div_matches.fixtures.soonest_to_farthest.page(1).per(one_round)
     @results = div_matches.results.recent_to_oldest.page(1).per(one_round)
   end
@@ -52,6 +53,11 @@ class PagesController < ApplicationController
   def chart_test
     matches = Match.age_group('PL').division('1').results
     @data = StatsOverTime.new(matches).call(:gf)
+  end
+
+  private
+  def home_layout
+    @current_user.present? && @current_user.teams.present? ? 'application' : 'splash'
   end
 
 
