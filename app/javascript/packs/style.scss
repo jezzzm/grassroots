@@ -1,6 +1,6 @@
 @import "~bootstrap/scss/bootstrap";
 
-@import url("https://fonts.googleapis.com/css?family=Pompiere&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Fugaz+One&display=swap");
 
 td,
 th {
@@ -189,13 +189,15 @@ table#ground-list td .btn {
 }
 
 .grassy {
-  font-family: "Pompiere", cursive;
+  font-family: "Fugaz One", sans-serif;
+  color: #222;
 }
 .logo-big {
-  font-size: 9rem;
+  font-size: 7rem;
 }
 
 .splash {
+  padding-top: 4em;
   background: url("/assets/sky-bg.jpg") no-repeat center center fixed;
   background-size: cover;
   position: fixed;
